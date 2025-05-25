@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitea
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`gitea.superkooka.com`)
+      kind: Rule
+      services:
+        - name: socat-proxy
+          port: 80
+  tls:
+    certResolver: letsencrypt
