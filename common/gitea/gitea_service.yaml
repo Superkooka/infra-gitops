@@ -5,9 +5,10 @@ metadata:
   name: socat-proxy
   namespace: prod
 spec:
-  selector:
-    app: socat-proxy
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: http
+  selector:
+    app: socat-proxy
