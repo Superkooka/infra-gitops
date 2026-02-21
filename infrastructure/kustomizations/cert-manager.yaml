@@ -16,3 +16,5 @@ spec:
       name: cert-manager
       namespace: cert-manager
   timeout: 5m
+  dependsOn:
+  - name: sources
