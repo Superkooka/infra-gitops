@@ -1,0 +1,76 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: grafana-helm-repository
+  namespace: app
+spec:
+  interval: 5m0s
+  url: https://grafana.github.io/helm-charts
+
+---
+
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana-helm-release
+  namespace: app
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: grafana
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-helm-repository
+        namespace: app
+      interval: 1m
+  values:
+    image:
+      tag: 12.3.3
+    deploymentStrategy:
+      type: Recreate
+    persistence:
+      enabled: true
+    plugins:
+      - grafana-sentry-datasource
+      - michaeldmoore-scatter-panel
+      - nline-plotlyjs-panel
+      - michaeldmoore-multistat-panel
+      - gapit-htmlgraphics-panel
+    rbac:
+      pspEnabled: false
+    grafana.ini:
+      plugins:
+          enabled: false
+      server:
+        domain: grafana.superkooka.com
+        root_url: "%(protocol)s://%(domain)s"
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: app
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - grafana.superkooka.com
+    secretName: grafana-tls
+  rules:
+  - host: grafana.superkooka.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana-helm-release
+            port:
+              number: 80
