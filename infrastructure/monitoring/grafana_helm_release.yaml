@@ -19,13 +19,8 @@ spec:
     deploymentStrategy:
       type: Recreate
     persistence:
+      type: pvc
       enabled: true
-    plugins:
-      - grafana-sentry-datasource
-      - michaeldmoore-scatter-panel
-      - nline-plotlyjs-panel
-      - michaeldmoore-multistat-panel
-      - gapit-htmlgraphics-panel
     rbac:
       pspEnabled: false
     grafana.ini:
