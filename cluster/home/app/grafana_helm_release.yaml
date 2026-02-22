@@ -34,32 +34,3 @@ spec:
       server:
         domain: grafana.superkooka.com
         root_url: "%(protocol)s://%(domain)s"
-
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: grafana
-  namespace: app
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-spec:
-  ingressClassName: traefik
-  tls:
-  - hosts:
-    - grafana.superkooka.com
-    secretName: grafana-tls
-  rules:
-  - host: grafana.superkooka.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: grafana-helm-release
-            port:
-              number: 80
