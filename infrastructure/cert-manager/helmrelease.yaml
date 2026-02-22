@@ -11,7 +11,7 @@ spec:
       version: "v1.19.x"
       sourceRef:
         kind: HelmRepository
-        name: jetstack
+        name: jetstack-helm-repository
         namespace: flux-system
   values:
     crds: 

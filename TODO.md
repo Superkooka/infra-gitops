@@ -1,0 +1,14 @@
+- [ ] Setup l'ingress (traefik)
+- [ ] Jellyfin
+- [ ] Pterodactyl panel
+- [ ] Gitea
+- [ ] Gitea Worker (CI)
+- [ ] Miniflux
+- [ ] Grafana
+
+- [ ] Different exporter pterodactyl
+- [ ] Repository Docker
+- [ ] Serveur Matrix
+- [ ] Serveur TS (hors du ptero)
+- [ ] Systeme de backup
+- [ ] Serveur Minio
