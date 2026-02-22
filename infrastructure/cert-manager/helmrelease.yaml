@@ -15,4 +15,4 @@ spec:
         namespace: flux-system
   values:
     crds: 
-      enable: true
+      enabled: true
