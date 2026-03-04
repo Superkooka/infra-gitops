@@ -4,7 +4,7 @@ resources:
   - ../../base/gitea
   - ./gitea_admin_secret.yaml
 patches:
-  - path: values-patch.yaml
+  - path: gitea_values_patch.yaml
     target:
       kind: HelmRelease
       name: gitea
