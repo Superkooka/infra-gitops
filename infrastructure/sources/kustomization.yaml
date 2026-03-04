@@ -5,3 +5,5 @@ resources:
   - bitnami.yaml
   - grafana.yaml
   - gitea.yaml
+  - jellyfin.yaml
+  - nvidia.yaml

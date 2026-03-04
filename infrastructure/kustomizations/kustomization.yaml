@@ -4,3 +4,4 @@ resources:
   - cert-manager.yaml
   - cert-manager-config.yaml
   - sources.yaml
+  - nvidia.yaml
