@@ -9,3 +9,43 @@ spec:
       runAsUser: 1000
       runAsGroup: 1000
       fsGroup: 1000
+
+  persistence:
+    config:
+      enabled: false
+    media:
+      enabled: false
+
+  volumes:
+    - name: config
+      hostPath:
+        path: /etc/jellyfin
+    - name: cache
+      hostPath:
+        path: /var/cache/jellyfin
+    - name: data
+      hostPath:
+        path: /var/lib/jellyfin
+    - name: logs
+      hostPath:
+        path: /var/log/jellyfin
+    - name: media
+      hostPath:
+        path: /mnt/md0
+    - name: media-temp
+      hostPath:
+        path: /media/temp
+
+  volumeMounts:
+    - name: config
+      mountPath: /etc/jellyfin
+    - name: cache
+      mountPath: /var/cache/jellyfin
+    - name: data
+      mountPath: /var/lib/jellyfin
+    - name: logs
+      mountPath: /var/log/jellyfin
+    - name: media
+      mountPath: /mnt/md0
+    - name: media-temp
+      mountPath: /media/temp
