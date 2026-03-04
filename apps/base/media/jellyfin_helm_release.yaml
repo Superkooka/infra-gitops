@@ -15,12 +15,10 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    podSpec:
-      runtimeClassName: nvidia
+    runtimeClassName: nvidia
     resources:
       limits:
         nvidia.com/gpu: 1
-
     env:
       NVIDIA_VISIBLE_DEVICES: "all"
       NVIDIA_DRIVER_CAPABILITIES: "all"
