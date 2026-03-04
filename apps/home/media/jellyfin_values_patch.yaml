@@ -16,6 +16,9 @@ spec:
       media:
         enabled: false
 
+    volumes: []
+    volumeMounts: []
+
     volumes:
       - name: config
         hostPath:
