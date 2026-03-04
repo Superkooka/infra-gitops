@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ../../base/monitoring
 patches:
-  - path: values-patch.yaml
+  - path: grafana_values_patch.yaml
     target:
       kind: HelmRelease
       name: grafana-helm-release
