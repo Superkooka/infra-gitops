@@ -26,6 +26,3 @@ spec:
     grafana.ini:
       plugins:
           enabled: false
-      server:
-        domain: grafana.superkooka.com
-        root_url: "%(protocol)s://%(domain)s"

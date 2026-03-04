@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana-helm-release
+  namespace: monitoring
+spec:
+  values:
+    image:
+      tag: 12.3.3
+    grafana.ini:
+      plugins:
+          enabled: false
+      server:
+        domain: grafana.superkooka.com
+        root_url: "%(protocol)s://%(domain)s"
