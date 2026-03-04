@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ../../base/media
 patches:
-  - path: values-patch.yaml
+  - path: jellyfin_values_patch.yaml
     target:
       kind: HelmRelease
       name: jellyfin-helm-release
