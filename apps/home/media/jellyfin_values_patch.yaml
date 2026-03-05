@@ -10,6 +10,14 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
 
+    persistence:
+      config:
+        enabled: false
+      media:
+        enabled: false
+      cache:
+        enabled: false
+
     volumes: []
     volumeMounts: []
 
