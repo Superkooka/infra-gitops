@@ -11,10 +11,10 @@ spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - jellyfin.superkooka.com
+        - film.superkooka.com
       secretName: jellyfin-tls
   rules:
-    - host: jellyfin.superkooka.com
+    - host: film.superkooka.com
       http:
         paths:
           - path: /
