@@ -21,6 +21,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: jellyfin
+                name: jellyfin-helm-release
                 port:
                   number: 80
