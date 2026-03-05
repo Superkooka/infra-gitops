@@ -14,5 +14,6 @@ spec:
         name: nvidia
         namespace: flux-system
   values:
+    runtimeClassName: nvidia
     gfd:
       enabled: true
