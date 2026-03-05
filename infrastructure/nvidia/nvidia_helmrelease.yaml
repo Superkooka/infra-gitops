@@ -13,3 +13,6 @@ spec:
         kind: HelmRepository
         name: nvidia
         namespace: flux-system
+  values:
+    gfd:
+      enabled: true
