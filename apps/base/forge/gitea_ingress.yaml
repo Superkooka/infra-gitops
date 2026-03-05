@@ -23,4 +23,4 @@ spec:
           service:
             name: gitea-http
             port:
-              number: 80
+              number: 3000

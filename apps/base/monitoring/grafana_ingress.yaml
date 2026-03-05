@@ -23,4 +23,4 @@ spec:
           service:
             name: grafana-helm-release
             port:
-              number: 80
+              number: 8096
