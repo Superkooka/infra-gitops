@@ -10,6 +10,10 @@ spec:
 
     jellyfin:
       env:
+      - name: JELLYFIN_CACHE_DIR
+        value: "/cache"
+      - name: JELLYFIN_CONFIG_DIR
+        value: "/config"
       - name: JELLYFIN_DATA_DIR
         value: "/var/lib/jellyfin"
       - name: JELLYFIN_LOG_DIR
@@ -21,6 +25,7 @@ spec:
       fsGroup: 110
       supplementalGroups:
         - 1001
+
     persistence:
       config:
         enabled: true
