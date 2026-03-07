@@ -32,6 +32,8 @@ spec:
         enabled: false
 
     volumes:
+      - name: cache
+        emptyDir: {}
       - name: data
         hostPath:
           path: /var/lib/jellyfin
@@ -46,6 +48,8 @@ spec:
           path: /media/temp
 
     volumeMounts:
+      - name: cache
+        mountPath: /var/cache/jellyfin
       - name: data
         mountPath: /var/lib/jellyfin
       - name: logs
