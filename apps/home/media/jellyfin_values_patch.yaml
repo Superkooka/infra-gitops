@@ -5,6 +5,9 @@ metadata:
   namespace: media
 spec:
   values:
+    image:
+      tag: 10.11.6
+
     podSecurityContext:
       runAsUser: 103
       runAsGroup: 110
