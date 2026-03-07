@@ -30,8 +30,6 @@ spec:
         existingClaim: jellyfin-config-pvc
       media:
         enabled: false
-      cache:
-        enabled: true
 
     volumes:
       - name: data
