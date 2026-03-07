@@ -11,9 +11,9 @@ spec:
     jellyfin:
       env:
       - name: JELLYFIN_DATA_DIR
-        value: "/var/lib/jellyfin/"
+        value: "/var/lib/jellyfin"
       - name: JELLYFIN_LOG_DIR
-        value: "/var/log/jellyfin/"
+        value: "/var/log/jellyfin"
 
     podSecurityContext:
       runAsUser: 103
