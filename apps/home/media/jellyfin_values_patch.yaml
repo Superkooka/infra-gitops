@@ -14,8 +14,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: true
-        persistentVolumeClaim: jellyfin-config-pvc
+        existingClaim: jellyfin-config-pvc
       media:
         enabled: false
       cache:
