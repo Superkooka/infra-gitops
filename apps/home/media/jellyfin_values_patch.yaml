@@ -10,8 +10,6 @@ spec:
 
     jellyfin:
       env:
-      - name: JELLYFIN_CACHE_DIR
-        value: "/cache"
       - name: JELLYFIN_CONFIG_DIR
         value: "/config"
       - name: JELLYFIN_DATA_DIR
