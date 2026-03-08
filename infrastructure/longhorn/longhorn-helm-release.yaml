@@ -18,7 +18,7 @@ spec:
     defaultSettings:
       backupTarget: "nfs://192.168.0.11:/mnt/md0/longhorn-backups" # should be on cluster/home, global ConfigMap?
       defaultReplicaCount: 1 # single node
-      storageReservedPercentageForDefaultDisk: 0
+      storageMinimalAvailablePercentage: 0
       defaultDataLocality: strict-local # create pv on same node as pod only
     persistence:
       defaultClass: true
