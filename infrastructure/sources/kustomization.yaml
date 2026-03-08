@@ -7,3 +7,4 @@ resources:
   - gitea.yaml
   - jellyfin.yaml
   - nvidia.yaml
+  - longhorn.yaml
