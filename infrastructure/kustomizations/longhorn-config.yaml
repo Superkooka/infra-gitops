@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./infrastructure/longhorn-recuring-jobs
+  path: ./infrastructure/longhorn-config
   prune: true
   sourceRef:
     kind: GitRepository
