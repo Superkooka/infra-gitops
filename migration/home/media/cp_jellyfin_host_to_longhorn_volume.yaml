@@ -1,0 +1,89 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: move-config-to-longhorn-volume
+  namespace: media
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      nodeName: snametr
+      restartPolicy: Never
+      containers:
+        - name: migrator
+          image: busybox
+          command: ["sh", "-c", "cp -av /src/. /dst/ && echo DONE && ls -la /dst/"]
+          volumeMounts:
+            - name: src
+              mountPath: /src
+            - name: dst
+              mountPath: /dst
+      volumes:
+        - name: src
+          persistentVolumeClaim:
+            claimName: jellyfin-config-pvc
+        - name: dst
+          persistentVolumeClaim:
+            claimName: jellyfin-config-pvc-longhorn
+
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: move-data-to-longhorn-volume
+  namespace: media
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      nodeName: snametr
+      restartPolicy: Never
+      containers:
+        - name: migrator
+          image: busybox
+          command: ["sh", "-c", "cp -av /src/. /dst/ && echo DONE && ls -la /dst/"]
+          volumeMounts:
+            - name: src
+              mountPath: /src
+            - name: dst
+              mountPath: /dst
+      volumes:
+        - name: src
+          hostPath: 
+            path: "/var/lib/jellyfin"
+            type: Directory
+        - name: dst
+          persistentVolumeClaim:
+            claimName: jellyfin-data-pvc-longhorn
+
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: move-logs-to-longhorn-volume
+  namespace: media
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      nodeName: snametr
+      restartPolicy: Never
+      containers:
+        - name: migrator
+          image: busybox
+          command: ["sh", "-c", "cp -av /src/. /dst/ && echo DONE && ls -la /dst/"]
+          volumeMounts:
+            - name: src
+              mountPath: /src
+            - name: dst
+              mountPath: /dst
+      volumes:
+        - name: src
+          hostPath: 
+            path: "/var/log/jellyfin"
+            type: Directory
+        - name: dst
+          persistentVolumeClaim:
+            claimName: jellyfin-logs-pvc-longhorn

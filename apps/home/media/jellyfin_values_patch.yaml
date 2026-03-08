@@ -34,12 +34,13 @@ spec:
     volumes:
       - name: cache
         emptyDir: {}
+        medium: Memory
       - name: data
-        hostPath:
-          path: /var/lib/jellyfin
+        persistentVolumeClaim:
+          claimName: jellyfin-data-pvc
       - name: logs
-        hostPath:
-          path: /var/log/jellyfin
+        persistentVolumeClaim:
+          claimName: jellyfin-logs-pvc
       - name: media-raid
         hostPath:
           path: /mnt/md0

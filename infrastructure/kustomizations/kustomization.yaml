@@ -5,3 +5,4 @@ resources:
   - cert-manager-config.yaml
   - sources.yaml
   - nvidia.yaml
+  - longhorn.yaml
