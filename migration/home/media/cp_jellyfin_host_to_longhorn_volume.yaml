@@ -20,11 +20,12 @@ spec:
               mountPath: /dst
       volumes:
         - name: src
-          persistentVolumeClaim:
-            claimName: jellyfin-config-pvc
+          hostPath: 
+            path: "/etc/jellyfin"
+            type: Directory
         - name: dst
           persistentVolumeClaim:
-            claimName: jellyfin-config-pvc-longhorn
+            claimName: jellyfin-config-pvc
 
 ---
 
@@ -55,7 +56,7 @@ spec:
             type: Directory
         - name: dst
           persistentVolumeClaim:
-            claimName: jellyfin-data-pvc-longhorn
+            claimName: jellyfin-data-pvc
 
 ---
 
@@ -86,4 +87,4 @@ spec:
             type: Directory
         - name: dst
           persistentVolumeClaim:
-            claimName: jellyfin-logs-pvc-longhorn
+            claimName: jellyfin-logs-pvc
