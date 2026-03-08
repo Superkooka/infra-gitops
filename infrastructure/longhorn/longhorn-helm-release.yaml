@@ -20,3 +20,6 @@ spec:
       defaultReplicaCount: 1 # single node
       storageReservedPercentageForDefaultDisk: 0
       defaultDataLocality: strict-local # create pv on same node as pod only
+    persistence:
+      defaultClass: true
+      defaultClassReplicaCount: 1
