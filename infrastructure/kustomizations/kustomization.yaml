@@ -6,3 +6,4 @@ resources:
   - sources.yaml
   - nvidia.yaml
   - longhorn.yaml
+  - longhorn-config.yaml
