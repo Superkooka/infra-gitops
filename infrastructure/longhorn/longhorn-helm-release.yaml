@@ -36,7 +36,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.middlewares: longhorn-basic-auth@kubernetescrd,longhorn-system-redirect-noslash@kubernetescrd,longhorn-system-replacepath-longhorn-ui@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: longhorn-basic-auth@kubernetescrd,longhorn-redirect-noslash@kubernetescrd,longhorn-replacepath-longhorn-ui@kubernetescrd
     networkPolicies:
       enabled: true
       type: k3s
