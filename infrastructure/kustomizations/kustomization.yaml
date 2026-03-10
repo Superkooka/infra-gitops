@@ -7,3 +7,4 @@ resources:
   - nvidia.yaml
   - longhorn.yaml
   - longhorn-config.yaml
+  - traefik-config.yaml
