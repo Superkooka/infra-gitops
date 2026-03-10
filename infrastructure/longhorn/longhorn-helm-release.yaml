@@ -23,3 +23,13 @@ spec:
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 1
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      host: dashboard.private.superkooka.com
+      path: /longhorn
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: longhorn-basic-auth@kubernetescrd
