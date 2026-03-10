@@ -10,11 +10,7 @@ spec:
     - match: Host(`dashboard.private.superkooka.com`) && PathPrefix(`/traefik`)
       kind: Rule
       middlewares:
-        - name: basic-auth
-          namespace: kube-system
-        - name: redirect-noslash
-          namespace: kube-system
-        - name: replacepath-traefik-ui
+        - name: traefik-basic-auth
           namespace: kube-system
       services:
         - name: api@internal
