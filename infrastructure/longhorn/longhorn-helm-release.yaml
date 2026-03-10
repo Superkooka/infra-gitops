@@ -28,10 +28,15 @@ spec:
       ingressClassName: traefik
       host: dashboard.private.superkooka.com
       path: /longhorn
+      pathType: Prefix
       tls: true
       tlsSecret: longhorn-tls
+      secureBackends: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.middlewares: longhorn-basic-auth@kubernetescrd
+    networkPolicies:
+      enabled: true
+      type: k3s
