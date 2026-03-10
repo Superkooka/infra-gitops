@@ -12,6 +12,8 @@ spec:
       middlewares:
         - name: basic-auth
           namespace: kube-system
+        - name: redirect-noslash
+          namespace: kube-system
         - name: replacepath-traefik-ui
           namespace: kube-system
       services:
