@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: replacepath-traefik-ui
+  namespace: kube-system
+spec:
+  replacePathRegex:
+    regex: ^/traefik/(.*)
+    replacement: /${1}
