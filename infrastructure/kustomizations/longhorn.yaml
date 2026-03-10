@@ -12,3 +12,4 @@ spec:
     name: flux-system
   dependsOn:
     - name: sources
+    - name: cert-manager-config
