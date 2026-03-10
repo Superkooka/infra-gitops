@@ -5,6 +5,8 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    api:
+      basePath: /traefik
     ingressRoute:
       dashboard:
         enabled: false
