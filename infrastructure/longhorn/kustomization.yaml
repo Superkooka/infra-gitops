@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - longhorn-login-secret.yaml
-  - longhorn-basic-auth-middleware.yaml
+  - longhorn-middleware.yaml
   - longhorn-helm-release.yaml
