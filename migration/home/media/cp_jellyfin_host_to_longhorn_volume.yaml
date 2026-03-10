@@ -7,7 +7,7 @@ spec:
   backoffLimit: 0
   template:
     spec:
-      nodeName: snametr
+      nodeName: og-server
       restartPolicy: Never
       containers:
         - name: migrator
@@ -21,7 +21,7 @@ spec:
       volumes:
         - name: src
           hostPath: 
-            path: "/etc/jellyfin"
+            path: "/mnt/md0/backups/jellyfin.20250817160951_10.10.7/config"
             type: Directory
         - name: dst
           persistentVolumeClaim:
@@ -38,7 +38,7 @@ spec:
   backoffLimit: 0
   template:
     spec:
-      nodeName: snametr
+      nodeName: og-server
       restartPolicy: Never
       containers:
         - name: migrator
@@ -52,39 +52,8 @@ spec:
       volumes:
         - name: src
           hostPath: 
-            path: "/var/lib/jellyfin"
+            path: "/mnt/md0/backups/jellyfin.20250817160951_10.10.7/data/"
             type: Directory
         - name: dst
           persistentVolumeClaim:
             claimName: jellyfin-data-pvc
-
----
-
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: move-logs-to-longhorn-volume
-  namespace: media
-spec:
-  backoffLimit: 0
-  template:
-    spec:
-      nodeName: snametr
-      restartPolicy: Never
-      containers:
-        - name: migrator
-          image: busybox
-          command: ["sh", "-c", "cp -av /src/. /dst/ && echo DONE && ls -la /dst/"]
-          volumeMounts:
-            - name: src
-              mountPath: /src
-            - name: dst
-              mountPath: /dst
-      volumes:
-        - name: src
-          hostPath: 
-            path: "/var/log/jellyfin"
-            type: Directory
-        - name: dst
-          persistentVolumeClaim:
-            claimName: jellyfin-logs-pvc
