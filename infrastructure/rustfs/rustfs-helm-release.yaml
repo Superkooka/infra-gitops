@@ -29,8 +29,8 @@ spec:
       hosts:
         - host: dashboard.private.superkooka.com
           paths:
-            - path: /
-              pathType: ImplementationSpecific
+            - path: /longhorn
+              pathType: Prefix
       tls:
         enabled: true
         existingSecret:
