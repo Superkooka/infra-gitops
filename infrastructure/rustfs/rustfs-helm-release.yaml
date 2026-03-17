@@ -25,6 +25,9 @@ spec:
         enabled: false
     secret:
       existingSecret: rustfs-console-login-secret
+    config:
+      rustfs:
+        domains: dashboard.private.superkooka.com
     ingress:
       enabled: true
       className: traefik
