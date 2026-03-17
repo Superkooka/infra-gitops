@@ -23,6 +23,8 @@ spec:
           logsClaim: rustfs-logs-pvc
       distributed:
         enabled: false
+    secret:
+      existingSecret: rustfs-console-login-secret
     ingress:
       enabled: true
       className: traefik
