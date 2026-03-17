@@ -1,0 +1,20 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nfs-provisioner
+  namespace: kube-system
+spec:
+  chart:
+    spec:
+      chart: nfs-subdir-external-provisioner
+      sourceRef:
+        kind: HelmRepository
+        name: nfs-helm-repository
+        namespace: flux-system
+  values:
+    nfs:
+      server: "192.168.0.11"
+      path: "/mnt/md0/rustfs"
+    storageClass:
+      name: nfs
+      reclaimPolicy: Retain

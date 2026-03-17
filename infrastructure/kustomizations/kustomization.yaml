@@ -8,3 +8,4 @@ resources:
   - longhorn.yaml
   - longhorn-config.yaml
   - traefik-config.yaml
+  - nfs.yaml

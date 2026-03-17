@@ -8,3 +8,4 @@ resources:
   - jellyfin.yaml
   - nvidia.yaml
   - longhorn.yaml
+  - nfs.yaml
