@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: rustfs
         namespace: flux-system
-      interval: 5m0s2
+      interval: 5m0s
   values:
     mode:
       standalone:
