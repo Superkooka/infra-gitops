@@ -23,11 +23,14 @@ spec:
           logsClaim: rustfs-logs-pvc
       distributed:
         enabled: false
+
     secret:
       existingSecret: rustfs-console-login-secret
+
     config:
       rustfs:
         domains: dashboard.private.superkooka.com
+
     ingress:
       enabled: true
       className: traefik
@@ -45,4 +48,4 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.middlewares: rustfs-redirect-noslash@kubernetescrd,rustfs-replacepath-rustfs-ui@kubernetescrd
+        # traefik.ingress.kubernetes.io/router.middlewares: rustfs-redirect-noslash@kubernetescrd,rustfs-replacepath-rustfs-ui@kubernetescrd
