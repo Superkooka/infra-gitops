@@ -35,9 +35,9 @@ spec:
       enabled: true
       className: traefik
       hosts:
-        - host: dashboard.private.superkooka.com
+        - host: rustfs.dashboard.private.superkooka.com
           paths:
-            - path: /rustfs
+            - path: /
               pathType: Prefix
       tls:
         enabled: true
@@ -48,4 +48,3 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.middlewares: rustfs-redirect-noslash@kubernetescrd,rustfs-stripprefix-rustfs@kubernetescrd
