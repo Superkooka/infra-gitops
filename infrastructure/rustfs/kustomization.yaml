@@ -5,5 +5,4 @@ resources:
   - rustfs-console-login-secret.yaml
   - rustfs-login-secret.yaml
   - rustfs-volumes.yaml
-  - rustfs-middleware.yaml
   - rustfs-helm-release.yaml
