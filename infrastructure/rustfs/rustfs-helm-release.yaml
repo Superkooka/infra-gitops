@@ -29,7 +29,7 @@ spec:
 
     config:
       rustfs:
-        domains: dashboard.private.superkooka.com
+        domains: rustfs.dashboard.private.superkooka.com
 
     ingress:
       enabled: true
