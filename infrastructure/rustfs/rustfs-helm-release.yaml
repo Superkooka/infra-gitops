@@ -29,7 +29,7 @@ spec:
       hosts:
         - host: dashboard.private.superkooka.com
           paths:
-            - path: /longhorn
+            - path: /rustfs
               pathType: Prefix
       tls:
         enabled: true
