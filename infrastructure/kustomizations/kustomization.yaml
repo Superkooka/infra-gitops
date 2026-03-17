@@ -9,3 +9,4 @@ resources:
   - longhorn-config.yaml
   - traefik-config.yaml
   - nfs.yaml
+  - rustfs.yaml

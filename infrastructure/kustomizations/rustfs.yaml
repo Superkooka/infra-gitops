@@ -1,0 +1,21 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: rustfs
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/rustfs
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: sources
+    - name: cert-manager-config
+    - name: longhorn-config
+    - name: nfs
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age

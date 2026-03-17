@@ -9,3 +9,4 @@ resources:
   - nvidia.yaml
   - longhorn.yaml
   - nfs.yaml
+  - rustfs.yaml
