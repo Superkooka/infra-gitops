@@ -4,6 +4,7 @@ metadata:
   name: nfs-provisioner
   namespace: kube-system
 spec:
+  interval: 5m0s
   chart:
     spec:
       chart: nfs-subdir-external-provisioner
