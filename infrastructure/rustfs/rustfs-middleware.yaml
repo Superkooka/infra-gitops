@@ -21,9 +21,10 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: replacepath-rustfs-ui
+  name: stripprefix-rustfs
   namespace: rustfs
 spec:
-  replacePathRegex:
-    regex: ^/rustfs/(.*)
-    replacement: /${1}
+  stripPrefix:
+    prefixes:
+      - /rustfs
+    forceSlash: true
