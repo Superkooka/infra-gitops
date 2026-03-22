@@ -1,10 +1,12 @@
-- [ ] Setup l'ingress (traefik)
-- [ ] Jellyfin
+- [ ] Postgresql
+
+- [x] Setup l'ingress (traefik)
+- [x] Jellyfin
 - [ ] Pterodactyl panel
 - [ ] Gitea
 - [ ] Gitea Worker (CI)
 - [ ] Miniflux
-- [ ] Grafana
+- [x] Grafana
 - [ ] keycloak (CapJS?)
 
 - [ ] Different exporter pterodactyl
@@ -12,5 +14,5 @@
 - [ ] Serveur Matrix
 - [ ] Serveur TS (hors du ptero)
 
-- [ ] Systeme de backup / Loghorn
-- [ ] Serveur Minio
+- [x] Systeme de backup / Loghorn
+- [x] Serveur RustFS
