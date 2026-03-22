@@ -1,0 +1,10 @@
+apiVersion: postgres.operator.superkooka.com/v1beta1
+kind: PostgresInstance
+metadata:
+  name: main-postgresql-instance
+  namespace: database
+spec:
+  postgresServiceRef:
+    name: light-k8s-postgres-operator-postgresql
+  credentialsRef:
+    name: postgresql-secret

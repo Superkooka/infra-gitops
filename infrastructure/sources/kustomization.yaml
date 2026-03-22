@@ -10,3 +10,4 @@ resources:
   - longhorn.yaml
   - nfs.yaml
   - rustfs.yaml
+  - github.superkooka.yaml

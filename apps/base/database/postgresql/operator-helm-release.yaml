@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: light-k8s-postgres-operator
+  namespace: database
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: light-k8s-postgres-operator
+      version: "1.0.0-alpha.1"
+      sourceRef:
+        kind: HelmRepository
+        name: light-k8s-postgres-operator
+        namespace: flux-system
+      interval: 1h
+  values:
+    operator:
+      image:
+        tag: "v1.0.0-alpha.1"
+      namespace: database
+
+    postgresql:
+      enabled: true
+      
+      primary:
+        persistance:
+          existingClaim: postgres-data-pvc

@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base/database
+  - ./postgresql-secret.yaml
+  - ./postgresql-instance.yaml
+patches:
+  - path: postgresql-operator-values-patch.yaml
+    target:
+      kind: HelmRelease
+      name: light-k8s-postgres-operator

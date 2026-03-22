@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: github-superkooka
+  namespace: flux-system
+spec:
+  type: oci
+  url: oci://ghcr.io/Superkooka/charts
+  interval: 5m0s
