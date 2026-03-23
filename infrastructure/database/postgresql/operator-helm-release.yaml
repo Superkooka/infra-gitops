@@ -11,7 +11,7 @@ spec:
       version: "1.0.0-alpha.1"
       sourceRef:
         kind: HelmRepository
-        name: light-k8s-postgres-operator
+        name: github-superkooka
         namespace: flux-system
       interval: 1h
   values:
@@ -22,7 +22,7 @@ spec:
 
     postgresql:
       enabled: true
-      
+
       primary:
         persistance:
           existingClaim: postgres-data-pvc
