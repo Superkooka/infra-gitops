@@ -1,13 +1,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: database-local-cr
+  name: database-overlay
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure
+    - name: database
   interval: 10m
-  path: ./cluster/home/database
+  path: ./cluster/home/database-overlay
   prune: true
   sourceRef:
     kind: GitRepository

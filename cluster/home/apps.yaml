@@ -6,7 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure
-    - name: database-local-cr
+    - name: database-overlay
   interval: 10m
   path: ./apps/home
   prune: true
