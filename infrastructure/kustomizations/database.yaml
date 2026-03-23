@@ -12,6 +12,7 @@ spec:
     name: flux-system
   dependsOn:
     - name: sources
+    - name: longhorn
   decryption:
     provider: sops
     secretRef:
