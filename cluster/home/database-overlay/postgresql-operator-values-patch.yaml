@@ -8,4 +8,18 @@ spec:
     postgresql:
       auth:
         existingSecret: postgresql-secret
-      forceUpdate: 1
+    primary:
+      extraInitContainers: |
+        - name: sync-password
+          image: bitnami/postgres:16
+          command:
+            - sh
+            - -c
+            - |
+              PGPASSWORD_FILE=/opt/bitnami/postgresql/secrets/postgres-password
+              PGPASSWORD=$(cat $PGPASSWORD_FILE)
+              psql -U postgres -d postgres -c "ALTER USER postgres WITH PASSWORD '$PGPASSWORD';"
+          volumeMounts:
+            - name: postgresql-password
+              mountPath: /opt/bitnami/postgresql/secrets
+              readOnly: true
