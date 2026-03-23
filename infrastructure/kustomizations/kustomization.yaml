@@ -10,3 +10,4 @@ resources:
   - traefik-config.yaml
   - nfs.yaml
   - rustfs.yaml
+  - database.yaml

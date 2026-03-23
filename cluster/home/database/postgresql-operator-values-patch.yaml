@@ -1,0 +1,10 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: light-k8s-postgres-operator
+  namespace: database
+spec:
+  values:
+    postgresql:
+      auth:
+        existingSecret: postgresql-secret
