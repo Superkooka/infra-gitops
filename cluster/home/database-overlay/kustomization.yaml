@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./postgresql-secret.yaml
   - ../../../infrastructure/database/postgresql/operator-helm-release.yaml
   - ./postgresql-instance.yaml
 patches:
