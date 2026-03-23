@@ -8,3 +8,4 @@ spec:
     postgresql:
       auth:
         existingSecret: postgresql-secret
+      forceUpdate: 1
