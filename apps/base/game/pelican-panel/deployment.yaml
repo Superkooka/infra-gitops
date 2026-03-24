@@ -43,3 +43,11 @@ spec:
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 10
+          volumeMounts:
+            - name: caddy-config
+              mountPath: /etc/caddy/Caddyfile
+              subPath: Caddyfile
+      volumes:
+        - name: caddy-config
+          configMap:
+            name: pelican-panel-caddy
