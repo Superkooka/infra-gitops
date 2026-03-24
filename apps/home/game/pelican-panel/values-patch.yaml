@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pelican-panel
+spec:
+  template:
+    spec:
+      containers:
+        - name: pelican
+          env:
+            - name: APP_URL
+              value: "https://pterodactyl.superkooka.com"
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pelican-secrets
+                  key: APP_KEY
+            - name: XDG_DATA_HOME
+              value: "/pelican-data"
+          volumeMounts:
+            - name: pelican-data
+              mountPath: /pelican-data
+            - name: pelican-logs
+              mountPath: /var/www/html/storage/logs
+
+      volumes:
+        - name: pelican-data
+          persistentVolumeClaim:
+            claimName: pelican-data-pvc
+        - name: pelican-logs
+          persistentVolumeClaim:
+            claimName: pelican-logs-pvc
