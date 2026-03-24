@@ -11,7 +11,7 @@ spec:
       containers:
         - name: fix-perms
           image: busybox
-          command: ["sh", "-c", "chown -R 33:33 /pelican-data /logs"]
+          command: ["sh", "-c", "chown -R 82:82 /pelican-data /logs"]
           volumeMounts:
             - name: pelican-data
               mountPath: /pelican-data
