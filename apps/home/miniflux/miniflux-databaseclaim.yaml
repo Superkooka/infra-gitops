@@ -13,7 +13,7 @@ spec:
   roles:
     - name: miniflux-rw
       schemas:
-        app:
+        miniflux-main:
           permissions: [CONNECT, CREATE, SELECT, INSERT, UPDATE, DELETE]
   users:
     - name: miniflux-user
