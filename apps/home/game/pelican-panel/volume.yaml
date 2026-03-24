@@ -3,7 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: pelican-logs-pvc
   namespace: game
+  annotations:
+    recurring-job-group.longhorn.io/default: enabled
 spec:
+  persistentVolumeReclaimPolicy: Retain
   accessModes: ["ReadWriteOnce"]
   storageClassName: longhorn
   resources:
@@ -15,7 +18,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: pelican-data-pvc
   namespace: game
+  annotations:
+    recurring-job-group.longhorn.io/default: enabled
 spec:
+  persistentVolumeReclaimPolicy: Retain
   accessModes: ["ReadWriteOnce"]
   storageClassName: longhorn
   resources:
