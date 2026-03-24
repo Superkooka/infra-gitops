@@ -27,6 +27,18 @@ spec:
           ports:
             - containerPort: 80
               name: http
+          livenessProbe:
+            httpGet:
+              path: /up
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /up
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
 
         - name: pelican-queue-worker
           image: ghcr.io/pelican-dev/panel:v1.0.0-beta33@sha256:871032c289b7e00a23e1eb701772603750a14b8c7cfa72b072058ce645c41032
@@ -39,3 +51,15 @@ spec:
               "--tries=3",
               "--max-time=3600",
             ]
+          livenessProbe:
+            httpGet:
+              path: /up
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /up
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
