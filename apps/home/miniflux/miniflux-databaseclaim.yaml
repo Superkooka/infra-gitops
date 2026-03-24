@@ -9,11 +9,11 @@ spec:
     namespace: database
   database: miniflux
   schemas:
-    - name: miniflux-main
+    - name: public
   roles:
     - name: miniflux-rw
       schemas:
-        miniflux-main:
+        public:
           permissions: [CONNECT, CREATE, SELECT, INSERT, UPDATE, DELETE]
   users:
     - name: miniflux-user
