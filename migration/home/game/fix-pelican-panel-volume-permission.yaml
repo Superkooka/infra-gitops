@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fix-pelican-panel-volume-permission
+  namespace: game
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: fix-perms
+          image: busybox
+          command: ["sh", "-c", "chown -R 33:33 /pelican-data /logs"]
+          volumeMounts:
+            - name: pelican-data
+              mountPath: /pelican-data
+            - name: pelican-logs
+              mountPath: /logs
+      volumes:
+        - name: pelican-data
+          persistentVolumeClaim:
+            claimName: pelican-data-pvc
+        - name: pelican-logs
+          persistentVolumeClaim:
+            claimName: pelican-logs-pvc
