@@ -17,6 +17,8 @@ spec:
                   key: APP_KEY
             - name: XDG_DATA_HOME
               value: "/pelican-data"
+            - name: TZ
+              value: "Europe/Paris"
           volumeMounts:
             - name: pelican-data
               mountPath: /pelican-data
