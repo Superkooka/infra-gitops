@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pelican-service
+  name: pelican-panel-service
   namespace: game
 spec:
   selector:
