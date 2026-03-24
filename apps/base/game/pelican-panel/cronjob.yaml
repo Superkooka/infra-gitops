@@ -11,7 +11,10 @@ spec:
       template:
         spec:
           securityContext:
+            runAsUser: 82
+            runAsGroup: 82
             fsGroup: 82
+
           restartPolicy: OnFailure
           containers:
             - name: scheduler
