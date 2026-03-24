@@ -25,20 +25,6 @@ spec:
             - name: pelican-logs
               mountPath: /var/www/html/storage/logs
 
-        - name: pelican-queue-worker
-          env:
-            - name: APP_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: pelican-secret
-                  key: APP_KEY
-            - name: XDG_DATA_HOME
-              value: "/pelican-data"
-          volumeMounts:
-            - name: pelican-data
-              mountPath: /pelican-data
-            - name: pelican-logs
-              mountPath: /var/www/html/storage/logs
       volumes:
         - name: pelican-data
           persistentVolumeClaim:
