@@ -50,4 +50,4 @@ spec:
             - name: BASE_URL
               value: "https://rss.superkooka.com"
             - name: DISABLE_API
-              value: true
+              value: "true"
