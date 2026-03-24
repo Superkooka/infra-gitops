@@ -5,7 +5,8 @@ metadata:
   namespace: game
 spec:
   selector:
-    app: pelican
+    app: pelican-panel
   ports:
     - port: 80
       targetPort: 80
+      protocol: TCP
