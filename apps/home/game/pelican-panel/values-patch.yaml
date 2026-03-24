@@ -13,7 +13,7 @@ spec:
             - name: APP_KEY
               valueFrom:
                 secretKeyRef:
-                  name: pelican-secrets
+                  name: pelican-secret
                   key: APP_KEY
             - name: XDG_DATA_HOME
               value: "/pelican-data"
