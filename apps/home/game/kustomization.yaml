@@ -5,6 +5,7 @@ resources:
   - ../../base/game
   - pelican-panel/secret.yaml
   - pelican-panel/volume.yaml
+  - pelican-panel/middleware.yaml
   - pelican-panel/ingress.yaml
 patches:
   - path: pelican-panel/values-patch.yaml
