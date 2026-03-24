@@ -6,5 +6,6 @@ metadata:
   namespace: database
 data:
   values.yaml: |
-    auth:
-      existingSecret: postgresql-secret
+    postgresql:
+      auth:
+        existingSecret: postgresql-secret
