@@ -22,6 +22,8 @@ spec:
           env:
             - name: BEHIND_PROXY
               value: "true"
+            - name: TRUSTED_PROXY
+              value: "10.42.0.0/24"
           ports:
             - containerPort: 80
               name: http
