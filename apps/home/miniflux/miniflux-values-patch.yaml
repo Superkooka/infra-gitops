@@ -47,3 +47,7 @@ spec:
                   key: ADMIN_PASSWORD
             - name: CREATE_ADMIN
               value: "1"
+            - name: BASE_URL
+              value: "https://rss.superkooka.com"
+            - name: DISABLE_API
+              value: true
