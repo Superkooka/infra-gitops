@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pelican-scheduler
+  namespace: game
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: scheduler
+              env:
+                - name: XDG_DATA_HOME
+                  value: "/pelican-data"
+                - name: APP_URL
+                  value: "https://pterodactyl.superkooka.com"
+                - name: APP_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: pelican-secret
+                      key: APP_KEY
+              volumeMounts:
+                - name: pelican-data
+                  mountPath: /pelican-data
+          volumes:
+            - name: pelican-data
+              persistentVolumeClaim:
+                claimName: pelican-data-pvc

@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pelican-scheduler
+  namespace: game
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            fsGroup: 33
+          restartPolicy: OnFailure
+          containers:
+            - name: scheduler
+              image: ghcr.io/pelican-dev/panel:v1.0.0-beta33@sha256:871032c289b7e00a23e1eb701772603750a14b8c7cfa72b072058ce645c41032
+              command: ["php", "/var/www/html/artisan", "schedule:run"]

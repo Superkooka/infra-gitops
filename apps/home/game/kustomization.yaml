@@ -11,3 +11,8 @@ patches:
     target:
       kind: Deployment
       name: pelican-panel
+
+  - path: pelican-panel/cronjob-patch.yaml
+    target:
+      kind: Cronjob
+      name: pelican-scheduler
