@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux
+  namespace: miniflux
+  labels:
+    app: miniflux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: miniflux
+  strategy:
+    type: Recreate # not sure
+  template:
+    metadata:
+      labels:
+        app: miniflux
+    spec:
+      containers:
+        - name: miniflux
+          image: docker.io/miniflux/miniflux:2.2.18
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: RUN_MIGRATIONS
+              value: "1"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      restartPolicy: Always

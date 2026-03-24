@@ -9,6 +9,14 @@ spec:
     spec:
       nodeName: og-server
       restartPolicy: Never
+      initContainers:
+        - name: wipe
+          image: busybox
+          command: ["sh", "-c", "rm -rf /dst/* /dst/.[!.]*"]
+          volumeMounts:
+            - name: dst
+              mountPath: /dst
+
       containers:
         - name: migrator
           image: busybox
@@ -40,6 +48,13 @@ spec:
     spec:
       nodeName: og-server
       restartPolicy: Never
+      initContainers:
+        - name: wipe
+          image: busybox
+          command: ["sh", "-c", "rm -rf /dst/* /dst/.[!.]*"]
+          volumeMounts:
+            - name: dst
+              mountPath: /dst
       containers:
         - name: migrator
           image: busybox

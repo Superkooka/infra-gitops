@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux
+spec:
+  template:
+    spec:
+      containers:
+        - name: miniflux
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-user-secret
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-user-secret
+                  key: port
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-user-secret
+                  key: database
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-user-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-user-secret
+                  key: password
+            - name: DATABASE_URL
+              value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable"
+            - name: ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-secret
+                  key: ADMIN_USERNAME
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-secret
+                  key: ADMIN_PASSWORD
+            - name: CREATE_ADMIN
+              value: "1"

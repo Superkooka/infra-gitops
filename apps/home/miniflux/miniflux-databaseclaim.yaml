@@ -1,0 +1,21 @@
+apiVersion: postgres.operator.superkooka.com/v1beta1
+kind: DatabaseClaim
+metadata:
+  name: miniflux-databaseclaim
+  namespace: miniflux
+spec:
+  instanceRef:
+    name: main-postgresql-instance
+    namespace: database
+  database: miniflux
+  schemas:
+    - name: miniflux-main
+  roles:
+    - name: miniflux-rw
+      schemas:
+        app:
+          permissions: [CONNECT, CREATE, SELECT, INSERT, UPDATE, DELETE]
+  users:
+    - name: miniflux-user
+      roles: [miniflux-rw]
+      secretName: miniflux-user-secret
