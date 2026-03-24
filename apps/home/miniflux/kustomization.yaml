@@ -9,5 +9,5 @@ resources:
 patches:
   - path: miniflux-values-patch.yaml
     target:
-      kind: Deployement
+      kind: Deployment
       name: miniflux
