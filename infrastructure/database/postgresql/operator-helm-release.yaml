@@ -23,6 +23,8 @@ spec:
     postgresql:
       enabled: true
 
+      auth: {}
+
       primary:
         persistance:
           existingClaim: postgres-data-pvc
