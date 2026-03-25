@@ -17,7 +17,7 @@ spec:
 
     service:
       additionalServices:
-        - name: traefik-udp
+        traefik-udp:
           type: LoadBalancer
           ports:
             - name: websecure-udp
