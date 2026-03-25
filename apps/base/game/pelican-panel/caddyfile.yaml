@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pelican-panel-caddy
+  namespace: game
+data:
+  Caddyfile: |
+    {
+        admin off
+        servers {
+            trusted_proxies static 10.42.0.0/16
+        }
+    }
+
+    :80 {
+        root * /var/www/html/public
+        encode gzip
+
+        php_fastcgi 127.0.0.1:9000 {
+            env PHP_VALUE "upload_max_filesize = 512M
+                           post_max_size = 512M"
+        }
+        file_server
+    }

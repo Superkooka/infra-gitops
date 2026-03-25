@@ -15,8 +15,19 @@ spec:
           enabled: true
         advertisedPort: 443
 
+    service:
+      additionalServices:
+        - name: traefik-udp
+          type: LoadBalancer
+          ports:
+            - name: websecure-udp
+              port: 443
+              protocol: UDP
+              targetPort: 8443
+
     api:
       basePath: /traefik
+
     ingressRoute:
       dashboard:
         enabled: false
