@@ -12,10 +12,10 @@ spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - pterodactyl.superkooka.com
+        - pelican.superkooka.com
       secretName: pelican-panel-tls
   rules:
-    - host: pterodactyl.superkooka.com
+    - host: pelican.superkooka.com
       http:
         paths:
           - path: /

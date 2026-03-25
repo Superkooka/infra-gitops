@@ -9,7 +9,7 @@ spec:
         - name: pelican
           env:
             - name: APP_URL
-              value: "https://pterodactyl.superkooka.com"
+              value: "https://pelican.superkooka.com"
             - name: APP_KEY
               valueFrom:
                 secretKeyRef:
