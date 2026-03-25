@@ -5,28 +5,16 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    experimental:
-      http3:
-        enabled: true
-
     ports:
+      traefik:
+        expose: true    
       websecure:
         http3:
           enabled: true
-        advertisedPort: 443
-
-    service:
-      additionalServices:
-        traefik-udp:
-          type: LoadBalancer
-          ports:
-            - name: websecure-udp
-              port: 443
-              protocol: UDP
-              targetPort: 8443
+          advertisedPort: 443
 
     api:
-      basePath: /traefik
+      dashboard: false
 
     ingressRoute:
       dashboard:

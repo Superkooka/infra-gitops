@@ -1,11 +1,11 @@
-- [ ] Postgresql
+- [x] Postgresql
 
 - [x] Setup l'ingress (traefik)
 - [x] Jellyfin
-- [ ] Pterodactyl panel
+- [x] Pelican panel
 - [ ] Gitea
 - [ ] Gitea Worker (CI)
-- [ ] Miniflux
+- [x] Miniflux
 - [x] Grafana
 - [ ] keycloak (CapJS?)
 
@@ -16,3 +16,5 @@
 
 - [x] Systeme de backup / Loghorn
 - [x] Serveur RustFS
+
+- [ ] Clean backup database
