@@ -5,6 +5,16 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    experimental:
+      http3:
+        enabled: true
+
+    ports:
+      websecure:
+        http3:
+          enabled: true
+        advertisedPort: 443
+
     api:
       basePath: /traefik
     ingressRoute:
