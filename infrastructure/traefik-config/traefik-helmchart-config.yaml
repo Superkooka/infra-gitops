@@ -6,7 +6,18 @@ metadata:
 spec:
   valuesContent: |-
     api:
-      dashboard: false
+      basePath: /traefik
+
+    ports:
+      sftp:
+        port: 2022
+        expose:
+          default: true
+        exposedPort: 2022
+        protocol: TCP
+      websecure:
+        http3:
+          advertisedPort: 443
 
     ingressRoute:
       dashboard:

@@ -7,6 +7,10 @@ resources:
   - pelican-panel/volume.yaml
   - pelican-panel/middleware.yaml
   - pelican-panel/ingress.yaml
+
+  - pelican-wings/volume.yaml
+  - pelican-wings/ingress.yaml
+
 patches:
   - path: pelican-panel/values-patch.yaml
     target:
@@ -17,3 +21,8 @@ patches:
     target:
       kind: Cronjob
       name: pelican-scheduler
+
+  - path: pelican-wings/deployment-patch.yaml
+    target:
+      kind: Deployment
+      name: pelican-wings

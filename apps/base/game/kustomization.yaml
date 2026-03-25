@@ -7,3 +7,6 @@ resources:
   - pelican-panel/deployment.yaml
   - pelican-panel/service.yaml
   - pelican-panel/cronjob.yaml
+
+  - pelican-wings/deployment.yaml
+  - pelican-wings/service.yaml

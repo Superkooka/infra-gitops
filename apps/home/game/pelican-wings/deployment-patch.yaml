@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pelican-wings
+  namespace: game
+spec:
+  template:
+    spec:
+      containers:
+        - name: wings
+          volumeMounts:
+            - name: pelican-wings-config
+              mountPath: /etc/pelican/
+            - name: pelican-wings-data
+              mountPath: /var/lib/pelican/
+            - name: pelican-wings-logs
+              mountPath: /var/log/pelican/
+            - name: pelican-docker-containers
+              mountPath: /var/lib/docker/containers/
+            - name: pelican-volume-data
+              mountPath: /var/lib/pelican/volumes
+            - name: pelican-volume-tmp
+              mountPath: /tmp/pelican/
+
+      volumes:
+        - name: pelican-wings-config
+          hostPath:
+            path: /etc/pelican/
+        # - name: pelican-wings-config
+        #   persistentVolumeClaim:
+        #     claimName: pelican-wings-config-pvc
+        - name: pelican-wings-data
+          persistentVolumeClaim:
+            claimName: pelican-wings-data-pvc
+        - name: pelican-wings-logs
+          persistentVolumeClaim:
+            claimName: pelican-wings-logs-pvc
+        - name: pelican-docker-containers
+          hostPath:
+            path: /var/lib/docker/containers/
+        - name: pelican-volume-data
+          hostPath:
+            path: /var/lib/pelican/volumes
+        - name: pelican-volume-tmp
+          hostPath:
+            path: /tmp/pelican/

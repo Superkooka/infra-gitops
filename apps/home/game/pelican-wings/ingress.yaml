@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pelican-wings
+  namespace: game
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - wings.superkooka.com
+      secretName: pelican-wings-tls
+  rules:
+    - host: wings.superkooka.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pelican-wings-service
+                port:
+                  number: 80
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: sftp-route
+  namespace: game
+spec:
+  entryPoints:
+    - sftp
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: pelican-wings-service
+          port: 2022

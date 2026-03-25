@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pelican-wings
+  namespace: game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pelican-wings
+  template:
+    metadata:
+      labels:
+        app: pelican-wings
+    spec:
+      containers:
+        - name: wings
+          image: ghcr.io/pelican-dev/wings:v1.0.0-beta24@sha256:2a1d4bbf7af43870d746684f8f8e01144cb6a0605bacab779fc1b2fda390591a
+          tty: true
+
+          env:
+            - name: TZ
+              value: "UTC"
+            - name: WINGS_UID
+              value: "988"
+            - name: WINGS_GID
+              value: "988"
+            - name: WINGS_USERNAME
+              value: "pelican"
+
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 2022
+              name: sftp
+
+          securityContext:
+            privileged: true
+
+          volumeMounts:
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+            - name: docker-containers
+              mountPath: /var/lib/docker/containers/
+
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: docker-containers
+          hostPath:
+            path: /var/lib/docker/containers/

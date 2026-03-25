@@ -1,0 +1,34 @@
+# NEED pelican-default-config Configmap
+# kubectl create configmap pelican-default-config --from-file=./config.yml -n game
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-default-config
+  namespace: game
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: copy-default-config
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              "mkdir -p /etc/pelican && cp /mnt/pelican-config/config.yml /etc/pelican/config.yml",
+            ]
+          volumeMounts:
+            - name: pelican-default-config
+              readOnly: true
+              mountPath: "/mnt/pelican-config"
+            - name: pelican-wings-config
+              mountPath: /etc/pelican/
+      volumes:
+        - name: pelican-default-config
+          configMap:
+            name: pelican-default-config
+        - name: pelican-wings-config
+          persistentVolumeClaim:
+            claimName: pelican-wings-config-pvc
