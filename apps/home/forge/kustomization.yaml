@@ -2,9 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../base/forge
-  - ./gitea_admin_secret.yaml
-patches:
-  - path: gitea_values_patch.yaml
-    target:
-      kind: HelmRelease
-      name: gitea
+  # - ./gitea_admin_secret.yaml
+# patches:
+#   - path: gitea_values_patch.yaml
+#     target:
+#       kind: HelmRelease
+#       name: gitea
