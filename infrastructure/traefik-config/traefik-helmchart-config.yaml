@@ -8,6 +8,10 @@ spec:
     api:
       basePath: /traefik
 
+    service:
+      spec:
+        externalTrafficPolicy: Local
+
     ports:
       sftp:
         port: 2022

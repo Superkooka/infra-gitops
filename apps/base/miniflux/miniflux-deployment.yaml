@@ -26,6 +26,8 @@ spec:
           env:
             - name: RUN_MIGRATIONS
               value: "1"
+            - name: TRUSTED_REVERSE_PROXY_NETWORKS
+              value: "10.42.0.0/16,10.43.0.0/16"
           resources:
             requests:
               cpu: 50m

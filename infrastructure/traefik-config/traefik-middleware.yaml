@@ -6,3 +6,13 @@ metadata:
 spec:
   basicAuth:
     secret: basic-auth-secret # should be rename
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: real-ip
+  namespace: kube-system
+spec:
+  headers:
+    customRequestHeaders:
+      X-Real-IP: "{remoteAddr}"
