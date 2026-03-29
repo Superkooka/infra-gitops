@@ -1,20 +1,24 @@
-- [x] Postgresql
-
+- [x] Postgresql + Operator
 - [x] Setup l'ingress (traefik)
-- [x] Jellyfin
-- [x] Pelican panel
-- [ ] Gitea
-- [ ] Gitea Worker (CI)
-- [x] Miniflux
-- [x] Grafana
-- [ ] keycloak (CapJS?)
-
-- [ ] Different exporter pterodactyl
-- [ ] Repository Docker
-- [ ] Serveur Matrix
-- [ ] Serveur TS (hors du ptero)
-
-- [x] Systeme de backup / Loghorn
+- [x] Setup GPU
+- [x] Backup volumes - Loghorn
+- [ ] Backup database
 - [x] Serveur RustFS
 
-- [ ] Clean backup database
+- [ ] Monitoring Stack (Grafana, Loki, Prometheus, Alert Manager)
+
+- [ ] Gotify
+- [ ] Keycloak
+
+- [x] Jellyfin
+- [x] Miniflux
+- [ ] Synapse (matrix)
+- [ ] ts3server
+- [ ] Seafile
+
+- [ ] Forgejo
+- [ ] Forgejo Runner
+
+- [x] Pelican Panel
+- [x] Pelican Wings (host docker)
+- [ ] Pelican Wings did
