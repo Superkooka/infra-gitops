@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baikal
+  namespace: social
+  labels:
+    app: baikal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baikal
+  strategy:
+    type: Recreate # not sure
+  template:
+    metadata:
+      labels:
+        app: baikal
+    spec:
+      containers:
+        - name: baikal
+          image: docker.io/ckulka/baikal:0.10.1-nginx-php8.2@sha256:30c099b83aa88772b683d0c09fb6fa18ac82df442349fd6342e1df576abb580c
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: BAIKAL_SERVERNAME
+              value: "caldav.superkooka.com"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthcheck
+          #     port: 8080
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 30
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthcheck
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
+      restartPolicy: Always

@@ -1,0 +1,21 @@
+apiVersion: postgres.operator.superkooka.com/v1beta1
+kind: DatabaseClaim
+metadata:
+  name: baikal-databaseclaim
+  namespace: social
+spec:
+  instanceRef:
+    name: main-postgresql-instance
+    namespace: database
+  database: baikal
+  schemas:
+    - name: public
+  roles:
+    - name: baikal-rw
+      schemas:
+        public:
+          permissions: [CONNECT, CREATE, SELECT, INSERT, UPDATE, DELETE]
+  users:
+    - name: baikal-user
+      roles: [baikal-rw]
+      secretName: baikal-user-secret

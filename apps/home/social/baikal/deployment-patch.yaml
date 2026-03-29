@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baikal
+spec:
+  template:
+    spec:
+      containers:
+        - name: baikal
+          env:
+            - name: BAIKAL_SERVERNAME
+              value: "caldav.superkooka.com"
+          volumeMounts:
+            - name: baikal-config
+              mountPath: /var/www/baikal/config
+            - name: baikal-data
+              mountPath: /var/www/baikal/Specific
+
+      volumes:
+        - name: baikal-config
+          persistentVolumeClaim:
+            claimName: baikal-config-pvc
+        - name: baikal-data
+          persistentVolumeClaim:
+            claimName: baikal-data-pvc
