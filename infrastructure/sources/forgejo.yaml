@@ -1,0 +1,14 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: forgejo
+  namespace: flux-system
+spec:
+  interval: 1h
+  # https://code.forgejo.org/forgejo-helm/-/packages/container/forgejo/16.2.1
+  url: oci://data.forgejo.org/forgejo-helm/forgejo
+  ref:
+    tag: 16.2.1
+  # https://github.com/fluxcd/source-controller/issues/1932
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip

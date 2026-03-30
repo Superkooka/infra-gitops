@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - jetstack.yaml
   - bitnami.yaml
+  - forgejo.yaml
   - grafana.yaml
   - gitea.yaml
   - jellyfin.yaml

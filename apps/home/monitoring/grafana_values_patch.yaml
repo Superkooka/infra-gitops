@@ -7,9 +7,20 @@ spec:
   values:
     image:
       tag: 12.3.3
+      sha: ...
+
+    admin:
+      existingSecret: ""
+      userKey: admin-user
+      passwordKey: admin-password
+
+    plugins: 
+      - ...
+
     grafana.ini:
       plugins:
-          enabled: false
+        enabled: false
+
       server:
         domain: grafana.superkooka.com
         root_url: "%(protocol)s://%(domain)s"

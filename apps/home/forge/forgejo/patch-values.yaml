@@ -1,0 +1,73 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: forgejo
+  namespace: forge
+spec:
+  valuesFrom:
+    - kind: Secret
+      name: forgejo-database-rw-secret
+      valuesKey: host
+      targetPath: gitea.config.database.HOST
+    - kind: Secret
+      name: forgejo-database-rw-secret
+      valuesKey: database
+      targetPath: gitea.config.database.NAME
+    - kind: Secret
+      name: forgejo-database-rw-secret
+      valuesKey: username
+      targetPath: gitea.config.database.USER
+    - kind: Secret
+      name: forgejo-database-rw-secret
+      valuesKey: password
+      targetPath: gitea.config.database.PASSWD
+    - kind: Secret
+      name: forgejo-database-rw-secret
+      valuesKey: port
+      targetPath: gitea.config.database.PORT
+    - kind: Secret
+      name: forgejo-admin-user-secret
+      valuesKey: username
+      targetPath: gitea.admin.username
+    - kind: Secret
+      name: forgejo-admin-user-secret
+      valuesKey: password
+      targetPath: gitea.admin.password
+    - kind: Secret
+      name: forgejo-admin-user-secret
+      valuesKey: email
+      targetPath: gitea.admin.email
+
+  values:
+    image:
+      tag: 14.0.3
+      digest: sha256:8f4b1f86750e206824c669e1af17b6c6e8da9ed1a8ebda615db7526ee86d3eb2
+
+    persistence:
+      enabled: true
+      create: false
+      claimName: forgejo-data-pvc
+
+    gitea:
+      config:
+        server:
+          ROOT_URL: https://forge.superkooka.com/
+          DOMAIN: forge.superkooka.com
+          SSH_DOMAIN: forge.superkooka.com
+          LFS_START_SERVER: false
+        repository:
+          ROOT: /data/git/repositories
+          DEFAULT_PRIVATE: true
+          DISABLE_STARS: true
+        # repository.signing:
+        #   SIGNING_KEY: 69687C49F3CE9690DEA8B552F128CBE6AB3A7201
+        #   SIGNING_NAME: Forgejo instance signer
+        #   SIGNING_EMAIL: pgp-code@forgejo.org
+        #   # always sign if current user has a public key and twofa enabled
+        #   CRUD_ACTIONS: pubkey, twofa
+        #   MERGES: pubkey, twofa
+        lfs:
+          PATH: /data/git/lfs
+        # signing:
+        #   enabled: true
+        #   existingSecret: forgejo-code-gpg-key

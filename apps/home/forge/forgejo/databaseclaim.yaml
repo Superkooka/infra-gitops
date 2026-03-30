@@ -1,0 +1,21 @@
+apiVersion: postgres.operator.superkooka.com/v1beta1
+kind: DatabaseClaim
+metadata:
+  name: forgejo
+  namespace: forge
+spec:
+  instanceRef:
+    name: main-postgresql-instance
+    namespace: database
+  database: forgejo
+  schemas:
+    - name: forgejo-public
+  roles:
+    - name: forgejo-rw
+      schemas:
+        forgejo-public:
+          permissions: [CONNECT, CREATE, SELECT, INSERT, UPDATE, DELETE]
+  users:
+    - name: forgejo-user
+      roles: [forgejo-rw]
+      secretName: forgejo-database-rw-secret

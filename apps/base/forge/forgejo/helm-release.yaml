@@ -1,0 +1,77 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: forgejo
+  namespace: forge
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: forgejo
+    namespace: flux-system
+
+  valuesFrom:
+    - kind: Secret
+      name: miniflux-user-secret
+      valuesKey: host
+      targetPath: gitea.config.database.HOST
+    - kind: Secret
+      name: miniflux-user-secret
+      valuesKey: database
+      targetPath: gitea.config.database.NAME
+    - kind: Secret
+      name: miniflux-user-secret
+      valuesKey: username
+      targetPath: gitea.config.database.USER
+    - kind: Secret
+      name: miniflux-user-secret
+      valuesKey: password
+      targetPath: gitea.config.database.PASSWD
+    - kind: Secret
+      name: miniflux-user-secret
+      valuesKey: port
+      targetPath: gitea.config.database.PORT
+    - kind: Secret
+      name: forgejo-admin-user-secret
+      valuesKey: username
+      targetPath: gitea.admin.username
+    - kind: Secret
+      name: forgejo-admin-user-secret
+      valuesKey: password
+      targetPath: gitea.admin.password
+    - kind: Secret
+      name: forgejo-admin-user-secret
+      valuesKey: email
+      targetPath: gitea.admin.email
+
+  values:
+    strategy:
+      type: "Recreate"
+
+    replicaCount: 1
+
+    image:
+      registry: code.forgejo.org
+      repository: forgejo/forgejo
+
+    podSecurityContext:
+      fsGroup: 1000
+
+    persistence:
+      enabled: true
+      create: true
+
+    gitea:
+      config:
+        database:
+          DB_TYPE: postgres
+          SCHEMA: forgejo-public
+        session:
+          PROVIDER: db
+        security:
+          REVERSE_PROXY_TRUSTED_PROXIES: 10.42.0.0/16
+        server:
+          START_SSH_SERVER: false
+        # signing:
+        #   enabled: true
+        #   existingSecret: forgejo-code-gpg-key
