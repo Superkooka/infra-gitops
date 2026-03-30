@@ -4,3 +4,5 @@ resources:
   - namespace.yaml
   - jellyfin/helm-release.yaml
   - jellyfin/ingress.yaml
+  - seafile/deployment.yaml
+  - seafile/service.yaml

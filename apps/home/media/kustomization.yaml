@@ -3,8 +3,16 @@ kind: Kustomization
 resources:
   - ../../base/media
   - jellyfin/volumes.yaml
+  - seafile/volumes.yaml
+  - seafile/mariadb-secret.yaml
+  - seafile/admin-secret.yaml
+  - seafile/ingress.yaml
 patches:
   - path: jellyfin/helm-release-patch.yaml
     target:
       kind: HelmRelease
       name: jellyfin-helm-release
+  - path: seafile/deployment-patch.yaml
+    target:
+      kind: Deployment
+      name: seafile

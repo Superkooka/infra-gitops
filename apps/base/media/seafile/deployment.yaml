@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seafile
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seafile
+  template:
+    metadata:
+      labels:
+        app: seafile
+    spec:
+      containers:
+        - name: seafile
+          image: seafileltd/seafile-mc:13.0.19@sha256:3483711551088e1e3423ec2ee933dccfdc779041b11191ea5a943e3225b15637
+          ports:
+            - containerPort: 80
+          env:
+            - name: WAIT_FOR_DB
+              value: "true"
+
+            - name: SEAFILE_MYSQL_DB_HOST
+              value: "127.0.0.1"
+            - name: SEAFILE_MYSQL_DB_CCNET_DB_NAME
+              value: ccnet_db
+            - name: SEAFILE_MYSQL_DB_SEAFILE_DB_NAME
+              value: seafile_db
+            - name: SEAFILE_MYSQL_DB_SEAHUB_DB_NAME
+              value: seahub_db
+
+            # Cache (Valkey)
+            - name: REDIS_HOST
+              value: "127.0.0.1"
+            - name: REDIS_PORT
+              value: "6379"
+
+            # Memcached
+            - name: MEMCACHED_HOST
+              value: "127.0.0.1"
+
+            # Fuse option (montage FS)
+            - name: SEAFILE_USE_FUSE
+              value: "false"
+
+        - name: mariadb
+          image: mariadb:12.2.2@sha256:e16f61b8f6ed25111adbb1c5c19bbc2904efc8ed14029999af0cbe1c7ae18bf1
+          ports:
+            - containerPort: 3306
+
+        - name: valkey
+          image: valkey/valkey:9.0.3@sha256:3eeb09785cd61ec8e3be35f8804c8892080f3ca21934d628abc24ee4ed1698f6
+          ports:
+            - containerPort: 6379
+          args:
+            - "--save"
+            - "60"
+            - "1"
+
+        - name: memcached
+          image: memcached:1.6.41@sha256:27db90ca1d538b8bb8dae861fac9a44b3857c54bd1b3a3bd809a45a7744eaae2
+          ports:
+            - containerPort: 11211
+          args:
+            - "-m"
+            - "256" # MB
