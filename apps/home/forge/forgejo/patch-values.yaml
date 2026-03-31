@@ -55,7 +55,7 @@ spec:
           ROOT_URL: https://forge.superkooka.com/
           DOMAIN: forge.superkooka.com
           SSH_DOMAIN: forge.superkooka.com
-          LFS_START_SERVER: false
+          LFS_START_SERVER: true
         repository:
           ROOT: /data/git/repositories
           DEFAULT_PRIVATE: true
