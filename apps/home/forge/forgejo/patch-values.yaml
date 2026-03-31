@@ -69,6 +69,7 @@ spec:
           MERGES: pubkey, twofa
         lfs:
           PATH: /data/git/lfs
-        signing:
-          enabled: true
-          existingSecret: forgejo-gpg-key
+    signing:
+      enabled: true
+      gpgHome: /data/git/.gnupg
+      existingSecret: forgejo-gpg-key
