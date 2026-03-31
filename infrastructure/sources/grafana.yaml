@@ -1,8 +1,14 @@
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: grafana-helm-repository
   namespace: flux-system
 spec:
-  interval: 5m0s
-  url: https://grafana.github.io/helm-charts
+  interval: 1h
+  # https://github.com/grafana-community/helm-charts/pkgs/container/helm-charts%2Fgrafana
+  url: oci://data.forgejo.org/forgejo-helm/forgejo
+  ref:
+    tag: 11.3.5
+  # https://github.com/fluxcd/source-controller/issues/1932
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
