@@ -71,7 +71,7 @@ spec:
         security:
           REVERSE_PROXY_TRUSTED_PROXIES: 10.42.0.0/16
         server:
-          START_SSH_SERVER: false
+          START_SSH_SERVER: true
         # signing:
         #   enabled: true
         #   existingSecret: forgejo-code-gpg-key

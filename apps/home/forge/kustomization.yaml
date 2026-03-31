@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ../../base/forge
   - forgejo/admin-user-secret.yaml
+  - forgejo/internal-ssh-key-secret.yaml
   - forgejo/databaseclaim.yaml
   - forgejo/volumes.yaml
   - forgejo/ingress.yaml

@@ -20,6 +20,13 @@ spec:
         exposedPort: 2022
         protocol: TCP
 
+      ssh:
+        port: 2023
+        expose:
+          default: true
+        exposedPort: 2023
+        protocol: TCP
+
     ingressRoute:
       dashboard:
         enabled: false

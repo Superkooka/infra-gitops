@@ -40,8 +40,9 @@ spec:
 
   values:
     image:
-      tag: 14.0.3
-      digest: sha256:8f4b1f86750e206824c669e1af17b6c6e8da9ed1a8ebda615db7526ee86d3eb2
+      tag: 14.0.3-rootless
+      digest: sha256:3bde16a366e57f37c09599b77ceb83ed05b1934f8224072f8140bc66cf243608
+      rootless: true
 
     persistence:
       enabled: true
