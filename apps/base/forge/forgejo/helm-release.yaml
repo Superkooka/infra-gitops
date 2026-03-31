@@ -72,6 +72,8 @@ spec:
           REVERSE_PROXY_TRUSTED_PROXIES: 10.42.0.0/16
         server:
           START_SSH_SERVER: true
+        ssh:
+          MINIMUM_KEY_SIZES: 2047
         # signing:
         #   enabled: true
         #   existingSecret: forgejo-code-gpg-key
