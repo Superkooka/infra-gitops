@@ -11,10 +11,14 @@ spec:
           env:
             - name: SEAFILE_SERVER_HOSTNAME
               value: "seafile.superkooka.com"
+            - name: SEAFILE_SERVER_LETSENCRYPT
+              value: "false"
             - name: FILE_SERVER_ROOT
               value: "https://seafile.superkooka.com/seafhttp"
             - name: SERVICE_URL
               value: "https://seafile.superkooka.com/seafhttp"
+            - name: MEDIA_URL
+              value: "https://seafile.superkooka.com/"
             - name: TIME_ZONE
               value: "Europe/Paris"
 
