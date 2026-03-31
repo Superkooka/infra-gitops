@@ -60,15 +60,15 @@ spec:
           ROOT: /data/git/repositories
           DEFAULT_PRIVATE: true
           DISABLE_STARS: true
-        # repository.signing:
-        #   SIGNING_KEY: 69687C49F3CE9690DEA8B552F128CBE6AB3A7201
-        #   SIGNING_NAME: Forgejo instance signer
-        #   SIGNING_EMAIL: pgp-code@forgejo.org
-        #   # always sign if current user has a public key and twofa enabled
-        #   CRUD_ACTIONS: pubkey, twofa
-        #   MERGES: pubkey, twofa
+        repository.signing:
+          SIGNING_KEY: 0423CBB528FD933CA9209313A2E4E72A8571B586
+          SIGNING_NAME: Forgejo Instance
+          SIGNING_EMAIL: pgp.forgejo@superkooka.com
+          INITIAL_COMMIT: pubkey, twofa
+          CRUD_ACTIONS: pubkey, twofa
+          MERGES: pubkey, twofa
         lfs:
           PATH: /data/git/lfs
-        # signing:
-        #   enabled: true
-        #   existingSecret: forgejo-code-gpg-key
+        signing:
+          enabled: true
+          existingSecret: forgejo-gpg-key
