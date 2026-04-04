@@ -8,13 +8,8 @@ resources:
   - forgejo/databaseclaim.yaml
   - forgejo/volumes.yaml
   - forgejo/ingress.yaml
-  # - ./gitea_admin_secret.yaml
 patches:
   - path: forgejo/patch-values.yaml
     target:
       kind: HelmRelease
       name: forgejo
-#   - path: gitea_values_patch.yaml
-#     target:
-#       kind: HelmRelease
-#       name: gitea

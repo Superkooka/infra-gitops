@@ -3,5 +3,3 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - forgejo/helm-release.yaml
-  # - gitea/gitea_helm_release.yaml
-  # - gitea/gitea_ingress.yaml
