@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: perforce-copy-backup-to-volume
+  namespace: forge
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      nodeName: og-server
+      restartPolicy: Never
+      initContainers:
+        - name: wipe
+          image: busybox
+          command: ["sh", "-c", "rm -rf /dst/* /dst/.[!.]*"]
+          volumeMounts:
+            - name: dst
+              mountPath: /dst
+
+      containers:
+        - name: migrator
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              "cp -av /src/. /dst/ && chown -R 2000:2000 /dst/ && chmod -R 755 /dst/ && echo DONE && ls -la /dst/",
+            ]
+          volumeMounts:
+            - name: src
+              mountPath: /src
+            - name: dst
+              mountPath: /dst
+      volumes:
+        - name: src
+          hostPath:
+            path: "/mnt/md0/perforce/servers/gaming"
+            type: Directory
+        - name: dst
+          persistentVolumeClaim:
+            claimName: perforce-data-pvc
