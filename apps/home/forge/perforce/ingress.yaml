@@ -1,0 +1,13 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: perforce-route
+  namespace: game
+spec:
+  entryPoints:
+    - perforce
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: perforce-service
+          port: 1666

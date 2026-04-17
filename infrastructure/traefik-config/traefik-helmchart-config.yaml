@@ -13,6 +13,13 @@ spec:
         externalTrafficPolicy: Local
 
     ports:
+      perforce:
+        port: 1666
+        expose:
+          default: true
+        exposedPort: 1666
+        protocol: TCP
+
       sftp:
         port: 2022
         expose:

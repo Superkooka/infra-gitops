@@ -8,8 +8,14 @@ resources:
   - forgejo/databaseclaim.yaml
   - forgejo/volumes.yaml
   - forgejo/ingress.yaml
+  - perforce/volume.yaml
+  - perforce/ingress.yaml
 patches:
   - path: forgejo/patch-values.yaml
     target:
       kind: HelmRelease
       name: forgejo
+  - path: perforce/deployment-patch.yaml
+    target:
+      kind: Deployment
+      name: perforce-server

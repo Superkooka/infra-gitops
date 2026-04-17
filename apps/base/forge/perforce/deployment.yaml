@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perforce-server
+  namespace: forge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: perforce-server
+  template:
+    metadata:
+      labels:
+        app: perforce-server
+    spec:
+      containers:
+        - name: perforce-server
+          image: forge.superkooka.com/superkooka/perforce-server:dirty-latest@sha256:16c1a4c365a7e451526e58a473f1eba5580113658a5da95ed1d6e9d84666f83f
+
+          env:
+            - name: TZ
+              value: "UTC"
+
+          ports:
+            - containerPort: 1666
+              name: perforce
+
+          livenessProbe:
+            tcpSocket:
+              port: 1666
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            tcpSocket:
+              port: 1666
+            initialDelaySeconds: 10
+            periodSeconds: 5
