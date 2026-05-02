@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leaderboard-crontab
+  namespace: game
+spec:
+  schedule: "0 18 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 3
+
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+
+      template:
+        spec:
+          restartPolicy: Never
+
+          containers:
+            - name: generate-leaderboard
+              image: forge.superkooka.com/superkooka/lol-leaderboard:1.0.0-alpha1@sha256:0fa2df0fff96d8ac948359ea529a5562cb690728a1cd57968834d9248cad168d
+              imagePullPolicy: IfNotPresent
+
+              command:
+                - php
+                - application.php
+                - app:generate-leaderboard
+
+              args:
+                - "-n"

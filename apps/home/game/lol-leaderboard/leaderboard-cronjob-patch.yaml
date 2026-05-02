@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leaderboard-cronjob
+  namespace: game
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: generate-leaderboard
+
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  php application.php -n app:generate-leaderboard \
+                  "Superkooka#EUW" \
+                  "Légicentrisme#9409" \
+                  "Tyrraboeuf#EUW" \
+                  "AzyorSenpai#uwu" \
+                  "PaulusBonus#MALUS" \
+                  "Azyor#R2R" \
+                  "Amoroc56#EUW" \
+                  "FataL72#EUW" \
+                  --discord-webhook "$DISCORD_WEBHOOK"
+              args: ""
+              env:
+                - name: RUN_MIGRATION
+                  value: "1"
+                - name: SQLITE_FILE
+                  value: "/lol-leaderboard-database/database.sqlite"
+                - name: DISCORD_WEBHOOK
+                  valueFrom:
+                    secretKeyRef:
+                      name: lol-leaderboard-secret
+                      key: DISCORD_WEBHOOK
+                - name: RIOT_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: lol-leaderboard-secret
+                      key: RIOT_API_KEY
+
+              volumeMounts:
+                - name: lol-leaderboard-database
+                  mountPath: /lol-leaderboard-database
+          volumes:
+            - name: lol-leaderboard-database
+              persistentVolumeClaim:
+                claimName: lol-leaderboard-database-pvc

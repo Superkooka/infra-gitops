@@ -3,6 +3,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../base/game
+  - lol-leaderboard/secret.yaml
+  - lol-leaderboard/volume.yaml
+
   - pelican-panel/secret.yaml
   - pelican-panel/volume.yaml
   - pelican-panel/middleware.yaml
@@ -12,6 +15,16 @@ resources:
   - pelican-wings/ingress.yaml
 
 patches:
+  - path: lol-leaderboard/leaderboard-cronjob-patch.yaml
+    target:
+      kind: CronJob
+      name: leaderboard-cronjob
+
+  - path: lol-leaderboard/match-cronjob-patch.yaml
+    target:
+      kind: CronJob
+      name: match-cronjob
+
   - path: pelican-panel/values-patch.yaml
     target:
       kind: Deployment
