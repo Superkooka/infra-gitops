@@ -19,7 +19,7 @@ spec:
 
           containers:
             - name: generate-leaderboard
-              image: forge.superkooka.com/superkooka/lol-leaderboard:1.0.0-alpha1@sha256:0fa2df0fff96d8ac948359ea529a5562cb690728a1cd57968834d9248cad168d
+              image: forge.superkooka.com/superkooka/lol-leaderboard:1.0.0-alpha1@sha256:e2df99be622f335e2a2140e8462f99446d1c61bee747374d61ad02ea74d97137
               imagePullPolicy: IfNotPresent
 
               command:
