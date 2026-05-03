@@ -30,7 +30,7 @@ spec:
                 - name: RUN_MIGRATION
                   value: "1"
                 - name: SQLITE_FILE
-                  value: "database.sqlite"
+                  value: "/lol-leaderboard-database/database.sqlite"
                 - name: DISCORD_WEBHOOK
                   valueFrom:
                     secretKeyRef:

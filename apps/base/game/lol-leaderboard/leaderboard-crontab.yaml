@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: leaderboard-crontab
+  name: leaderboard-cronjob
   namespace: game
 spec:
   schedule: "0 18 * * *"
