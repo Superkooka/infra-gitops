@@ -25,7 +25,7 @@ spec:
                   "Amoroc56#EUW" \
                   "FataL72#EUW" \
                   --discord-webhook "$DISCORD_WEBHOOK"
-              args: ""
+              args: []
               env:
                 - name: RUN_MIGRATION
                   value: "1"
