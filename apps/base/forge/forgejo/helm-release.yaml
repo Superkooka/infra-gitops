@@ -73,7 +73,11 @@ spec:
         server:
           START_SSH_SERVER: true
         ssh:
-          MINIMUM_KEY_SIZES: 2047
+          MINIMUM_KEY_SIZES:
+            RSA: 2048
+            ED25519: 256
+            ECDSA: 256
+            DSA: -1
         # signing:
         #   enabled: true
         #   existingSecret: forgejo-code-gpg-key
