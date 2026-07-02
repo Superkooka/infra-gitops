@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner
+  namespace: forge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forgejo-runner
+  template:
+    metadata:
+      labels:
+        app: forgejo-runner
+    spec:
+      containers:
+        - name: forgejo-runner
+          image: code.forgejo.org/forgejo/runner:12.8.0@sha256:c1d8edf7ed81119152ee4d9ff750ba3c2eb250cad0803c5ddea8c36078824c11
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - |
+              while ! nc -z 127.0.0.1 2376 </dev/null; do
+                echo 'waiting for docker daemon...';
+                sleep 5;
+              done
+              /bin/forgejo-runner --config /etc/runner/config.yaml daemon
+          env:
+            - name: DOCKER_HOST
+              value: tcp://127.0.0.1:2376
+            - name: DOCKER_CERT_PATH
+              value: /certs/client
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
+          volumeMounts:
+            - name: runner-configfile
+              mountPath: /etc/runner
+            - name: docker-certs
+              mountPath: /certs
+            - name: runner-data
+              mountPath: /data
+
+        - name: dind
+          image: docker.io/docker:29.6.1-dind@sha256:66d292e5c26bd33a6f6f61cacb880de2186339a524ecba1ce098dbbaceed6515
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+          volumeMounts:
+            - name: docker-certs
+              mountPath: /certs
+          securityContext:
+            privileged: true
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - sh
+          #       - -c
+          #       - "docker --host tcp://127.0.0.1:2376 --tlsverify --tlscacert /certs/client/ca.pem --tlscert /certs/client/cert.pem --tlskey /certs/client/key.pem info"
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   failureThreshold: 12
+
+      volumes:
+        - name: docker-certs
+          emptyDir: {}
+        - name: runner-data
+          emptyDir: {}
+        - name: runner-configfile
+          configMap:
+            name: runner-configmap

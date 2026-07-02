@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: runner-configmap
+  namespace: forge
+data:
+  config.yaml: |
+    log:
+      level: info
+
+    runner:
+      file: /data/.runner
+      capacity: 3
+      timeout: 3h
+      fetch_timeout: 5s
+      fetch_interval: 2s
+      labels: []
+
+    cache:
+      enabled: true
+      dir: /data/cache
+
+    container:
+      network: bridge
+      valid_volumes:
+        - /data/**
+
+    host:
+      workdir_parent: /data/work
