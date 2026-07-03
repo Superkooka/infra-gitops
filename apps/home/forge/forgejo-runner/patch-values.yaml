@@ -6,32 +6,15 @@ metadata:
 spec:
   template:
     spec:
-      initContainers:
-        - name: register-runner
-          image: code.forgejo.org/forgejo/runner:12.8.0@sha256:c1d8edf7ed81119152ee4d9ff750ba3c2eb250cad0803c5ddea8c36078824c11
-          command:
-            - sh
-            - -c
-            - |
-              if [ ! -f /data/.runner ]; then
-                forgejo-runner create-runner-file \
-                  --instance https://forge.superkooka.com \
-                  --secret "$RUNNER_SECRET" \
-                  --output /data/.runner
-              else
-                echo "Runner already registered."
-              fi
-          env:
-            - name: RUNNER_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: runner-secret
-                  key: token
+      containers:
+        - name: forgejo-runner
           volumeMounts:
-            - name: runner-data
-              mountPath: /data
+            - name: runner-secret
+              mountPath: /etc/runner-secret
+              readOnly: true
       volumes:
         - name: runner-data
+          emptyDir: null
           persistentVolumeClaim:
             claimName: forgejo-runner-data-pvc
         - name: runner-secret

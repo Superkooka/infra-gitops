@@ -19,8 +19,12 @@ patches:
       name: forgejo
   - path: forgejo-runner/patch-values.yaml
     target:
-      kind: HelmRelease
+      kind: Deployment
       name: forgejo-runner
+  - path: forgejo-runner/configmap.yaml
+    target:
+      kind: ConfigMap
+      name: runner-configmap
   - path: perforce/deployment-patch.yaml
     target:
       kind: Deployment

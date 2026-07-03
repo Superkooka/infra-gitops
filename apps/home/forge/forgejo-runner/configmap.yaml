@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: runner-configmap
+  namespace: forge
+data:
+  config.yaml: |
+    log:
+      level: info
+    runner:
+      capacity: 3
+      timeout: 3h
+      fetch_timeout: 5s
+      fetch_interval: 2s
+      labels: []
+    cache:
+      enabled: true
+      dir: /data/cache
+    container:
+      network: bridge
+      valid_volumes:
+        - /data/**
+    host:
+      workdir_parent: /data/work
+    server:
+      connections:
+        home:
+          url: https://forge.superkooka.com/
+          uuid: 0eb7baee-904e-4f60-88bf-c37e96fcecb3
+          token_url: file:/etc/runner-secret/.token
