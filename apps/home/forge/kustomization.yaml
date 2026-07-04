@@ -9,6 +9,7 @@ resources:
   - forgejo/volumes.yaml
   - forgejo/ingress.yaml
   - forgejo-runner/runner-secret.yaml
+  - forgejo-runner/docker-registry-secret.yaml
   - forgejo-runner/volumes.yaml
   - perforce/volume.yaml
   - perforce/ingress.yaml
