@@ -42,7 +42,7 @@ spec:
                         --password-stdin
       volumes:
         - name: runner-data
-          emptyDir: null
+          # emptyDir: null
           persistentVolumeClaim:
             claimName: forgejo-runner-data-pvc
         - name: runner-secret

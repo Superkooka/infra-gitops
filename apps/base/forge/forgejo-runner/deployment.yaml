@@ -38,8 +38,8 @@ spec:
               mountPath: /etc/runner
             - name: docker-certs
               mountPath: /certs
-            - name: runner-data
-              mountPath: /data
+            # - name: runner-data
+            #   mountPath: /data
 
         - name: dind
           image: docker.io/docker:29.6.1-dind@sha256:66d292e5c26bd33a6f6f61cacb880de2186339a524ecba1ce098dbbaceed6515
@@ -65,8 +65,8 @@ spec:
       volumes:
         - name: docker-certs
           emptyDir: {}
-        - name: runner-data
-          emptyDir: {}
+        # - name: runner-data
+        #   emptyDir: {}
         - name: runner-configfile
           configMap:
             name: runner-configmap
