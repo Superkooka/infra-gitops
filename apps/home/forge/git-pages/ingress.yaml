@@ -4,17 +4,17 @@ metadata:
   name: git-pages
   namespace: forge
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod-dns01
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - "jasper.pages.forge.superkooka.com"
+        - "*.pages.forge.superkooka.com"
       secretName: git-pages-tls
   rules:
-    - host: "jasper.pages.forge.superkooka.com"
+    - host: "*.pages.forge.superkooka.com"
       http:
         paths:
           - path: /

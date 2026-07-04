@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod-dns01
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: admin@superkooka.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-dns-key
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-prod-api-token
+              key: apiToken
+        selector:
+          dnsZones:
+            - "superkooka.com"
