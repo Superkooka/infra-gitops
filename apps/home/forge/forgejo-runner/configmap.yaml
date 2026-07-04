@@ -38,5 +38,5 @@ data:
       connections:
         home:
           url: https://forge.superkooka.com/
-          uuid: 0eb7baee-904e-4f60-88bf-c37e96fcecb3
+          uuid: 7cbfa372-ddca-4b08-bb89-19e01e1cdc6c
           token_url: file:/etc/runner-secret/.token
