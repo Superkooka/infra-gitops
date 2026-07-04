@@ -12,7 +12,19 @@ data:
       timeout: 3h
       fetch_timeout: 5s
       fetch_interval: 2s
-      labels: []
+      labels:
+        - php8.5:docker://dhi.io/php:8.5.8-dev@sha256:0b6b8a4cbf5cb15c22248f844fef63eb28759433495529d13b4e4ffe94bf1eb0
+        - node26:docker://dhi.io/node:26.4.0-0-dev@sha256:3b4441ab89d565be22657eaaee47fe1a4d92b21020faa47f0b8e3323cec514e2
+        - java8:docker://dhi.io/eclipse-temurin:8u492-jdk-dev@sha256:957d27957ba1c7c920b3a18552dc685edd0d4da8ff7430250a0b56d91752c80e
+        - java21:docker://dhi.io/eclipse-temurin:21.0.11-jdk-dev@sha256:9a02b16d9f7d1bd7a5a4c1953c9bd8be28a8dfb3fa0987a658c6fa529360f1e1
+        - java25:docker://dhi.io/eclipse-temurin:25.0.3-jdk-dev@sha256:bdcac1e46cb1d8c1dae2c9ba78e86315d13af554b6f225bc357837c8a01b7194
+        - python3.14:docker://dhi.io/python:3.14.6-dev@sha256:7e185a21276ba76c262a73d65de5a25799edd019ae7615d6fc4e2a8e1e0b2ed2
+        - python3.13:docker://dhi.io/python:3.13.14-dev@sha256:60b73132e789899715341999c2d73a0d15e03ae10cab6b6045ddf07120c8163d
+        - rust1.96:docker://dhi.io/rust:1.96.1-dev@sha256:5f1359cd02e015137537cb82c3a291803d85d746b72791a78540ab4b511529a3
+        - crystal1.20:docker://crystallang/crystal:1.20.3@sha256:744b0943bc32d49c1092d1cd04384b79322db8733b0c8f22287ff1eabdbee03a
+        - janet:docker://leafgarland/janet:v1.41.2@sha256:cf8ae1b3e6ede8bfe15c7727ec84e6920bed1799d3fdde932b57128a0a804690
+        - dotnet10:docker://dhi.io/dotnet:10.0.301-sdk@sha256:c1610b63f60845e2b2ba6f6c38d9b53f3d34560a101e64ca4cd299a03d3d2630
+        - dotnet9:docker://dhi.io/dotnet:9.0.315-sdk@sha256:43768fdc6ebe6d9d814ef0499bcb325a197c7e6274bb3ce281963f17f737e1ff
     cache:
       enabled: true
       dir: /data/cache
