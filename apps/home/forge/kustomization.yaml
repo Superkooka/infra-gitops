@@ -11,6 +11,9 @@ resources:
   - forgejo-runner/runner-secret.yaml
   - forgejo-runner/docker-registry-secret.yaml
   - forgejo-runner/volumes.yaml
+  - git-pages/ingress.yaml
+  - git-pages/configmap.yaml
+  - git-pages/volumes.yaml
   - perforce/volume.yaml
   - perforce/ingress.yaml
 patches:
@@ -26,6 +29,10 @@ patches:
     target:
       kind: ConfigMap
       name: runner-configmap
+  - path: git-pages/deployment.yaml
+    target:
+      kind: Deployment
+      name: git-pages
   - path: perforce/deployment-patch.yaml
     target:
       kind: Deployment

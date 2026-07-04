@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: git-pages-config
+  namespace: forge
+data:
+  config.toml: |
+    log-format = "text"
+
+    [server]
+    pages = "tcp/0.0.0.0:3000"
+    metrics = "tcp/0.0.0.0:3002"
+    caddy = "-"
+
+    [[wildcard]]
+    domain = "pages.forge.superkooka.com"
+    # preview-domain = "preview.pages.forge.superkooka.com"
+
+    clone-url = "https://forge.superkooka.com/<user>/<project>.git"
+    authorization = "forgejo"
+
+    [storage]
+    type = "fs"
+
+    [storage.fs]
+    root = "/data"

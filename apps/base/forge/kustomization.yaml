@@ -5,5 +5,7 @@ resources:
   - forgejo/helm-release.yaml
   - forgejo-runner/runner-configmap.yaml
   - forgejo-runner/deployment.yaml
+  - git-pages/deployment.yaml
+  - git-pages/service.yaml
   - perforce/deployment.yaml
   - perforce/service.yaml
