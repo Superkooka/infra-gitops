@@ -33,7 +33,6 @@ spec:
 
     volumes:
       - name: cache
-        emptyDir: {}
         medium: Memory
       - name: data
         persistentVolumeClaim:
