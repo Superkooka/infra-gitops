@@ -6,3 +6,5 @@ resources:
   - jellyfin/ingress.yaml
   - seafile/deployment.yaml
   - seafile/service.yaml
+  - discord-quote-bot/deployment.yaml
+  - discord-quote-bot/service.yaml

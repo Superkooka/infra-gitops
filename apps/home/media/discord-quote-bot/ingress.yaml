@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: discord-quote-bot-route
+  namespace: media
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - discord-quote-bot.superkooka.com
+      secretName: discord-quote-bot-tls
+  rules:
+    - host: discord-quote-bot.superkooka.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: discord-quote-bot-service
+                port:
+                  number: 80

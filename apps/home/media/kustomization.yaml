@@ -7,6 +7,9 @@ resources:
   - seafile/mariadb-secret.yaml
   - seafile/admin-secret.yaml
   - seafile/ingress.yaml
+  - discord-quote-bot/volume.yaml
+  - discord-quote-bot/ingress.yaml
+  - discord-quote-bot/secret.yaml
 patches:
   - path: jellyfin/helm-release-patch.yaml
     target:
@@ -16,3 +19,7 @@ patches:
     target:
       kind: Deployment
       name: seafile
+  - path: discord-quote-bot/deployment-patch.yaml
+    target:
+      kind: Deployment
+      name: discord-quote-bot

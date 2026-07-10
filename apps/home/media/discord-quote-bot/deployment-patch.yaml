@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discord-quote-bot
+  namespace: media
+spec:
+  replicas: 1
+  template:
+    spec:
+      initContainers:
+        - name: migrate
+          env:
+            - name: DB_PATH
+              value: /data/quote.db
+            - name: MIGRATIONS_DIR
+              value: "/app/migrations/"
+
+          volumeMounts:
+            - name: discord-quote-bot-storage
+              mountPath: /data
+
+      containers:
+        - name: discord-quote-bot
+          env:
+            - name: DISCORD_APPLICATION_ID
+              valueFrom:
+                secretKeyRef:
+                  name: discord-quote-bot-secret
+                  key: applicationId
+            - name: DISCORD_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: discord-quote-bot-secret
+                  key: token
+            - name: DISCORD_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: discord-quote-bot-secret
+                  key: publicKey
+            - name: DB_PATH
+              value: /data/quote.db
+
+          volumeMounts:
+            - name: discord-quote-bot-storage
+              mountPath: /data
+      volumes:
+        - name: discord-quote-bot-storage
+          persistentVolumeClaim:
+            claimName: discord-quote-bot-data-pvc

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: discord-quote-bot-service
+  namespace: media
+spec:
+  selector:
+    app: discord-quote-bot
+  ports:
+    - name: interaction-api
+      port: 80
+      targetPort: 9000
+      protocol: TCP

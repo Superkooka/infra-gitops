@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discord-quote-bot
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discord-quote-bot
+  template:
+    metadata:
+      labels:
+        app: discord-quote-bot
+    spec:
+      initContainers:
+        - name: migrate
+          image: forge.superkooka.com/superkooka/discord-quote-bot:dirty-latest@sha256:3d64f9cddf3107e2af9af61e708bf8799e1b7c77850414c451fd8a99a3d6b74e
+          command:
+            - /usr/local/bin/migrate
+            - up
+          env:
+            - name: TZ
+              value: "UTC"
+      containers:
+        - name: discord-quote-bot
+          image: forge.superkooka.com/superkooka/discord-quote-bot:dirty-latest@sha256:3d64f9cddf3107e2af9af61e708bf8799e1b7c77850414c451fd8a99a3d6b74e
+
+          env:
+            - name: TZ
+              value: "UTC"
+
+          ports:
+            - containerPort: 9000
+              name: interaction-api
