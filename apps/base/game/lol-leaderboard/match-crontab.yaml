@@ -19,7 +19,7 @@ spec:
 
           containers:
             - name: track-matches
-              image: forge.superkooka.com/superkooka/lol-leaderboard:1.0.0-alpha5@sha256:0a3b121f540b5f7cb82faf692e25ceab269a08f281cee2d1d2919a3c9aea42c6
+              image: forge.superkooka.com/superkooka/lol-leaderboard:1.0.0-alpha6@sha256:2a59d2df58bf78a664583c90e1212626467aaaf295e358bca37eec17ec147c46
               imagePullPolicy: IfNotPresent
 
               command:
