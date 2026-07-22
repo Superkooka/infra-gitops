@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: personal-runner-configmap
+  namespace: forge
+data:
+  config.yaml: |
+    log:
+      level: info
+    runner:
+      capacity: 3
+      timeout: 3h
+      fetch_timeout: 5s
+      fetch_interval: 2s
+      labels:
+        - node24:docker://dhi.io/node:24.18.0-0-debian-dev@sha256:f840f3c488c579e78e6dffdf62dda5d9560eeac9f9d685778c7e14e6822e5b76
+        - node26:docker://dhi.io/node:26.4.0-0-dev@sha256:3b4441ab89d565be22657eaaee47fe1a4d92b21020faa47f0b8e3323cec514e2
+        - docker:docker://ghcr.io/catthehacker/ubuntu:act-24.04@sha256:c710431fbad9eb3bcb102d04e5ff74fbd0ce6e383f78afebfb3770a1a817fdf9
+    cache:
+      enabled: true
+      dir: /data/cache
+    container:
+      network: bridge
+      valid_volumes:
+        - /data/**
+    host:
+      workdir_parent: /data/work
+    server:
+      connections:
+        home:
+          url: https://forge.superkooka.com/
+          uuid: decc71e3-92d7-4074-977e-9247aa7ab0cc
+          token_url: file:/etc/runner-secret/.token

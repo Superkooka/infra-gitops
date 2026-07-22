@@ -11,6 +11,9 @@ resources:
   - forgejo-runner/runner-secret.yaml
   - forgejo-runner/docker-registry-secret.yaml
   - forgejo-runner/volumes.yaml
+  - forgejo-runner/personal-runner/configmap.yaml
+  - forgejo-runner/personal-runner/deployment.yaml
+  - forgejo-runner/personal-runner/runner-secret.yaml
   - git-pages/ingress.yaml
   - git-pages/configmap.yaml
   - git-pages/volumes.yaml

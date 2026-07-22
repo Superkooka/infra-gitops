@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-forgejo-runner
+  namespace: forge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: personal-forgejo-runner
+  template:
+    metadata:
+      labels:
+        app: personal-forgejo-runner
+    spec:
+      containers:
+        - name: personal-forgejo-runner
+          image: code.forgejo.org/forgejo/runner:12.13.1@sha256:e070b166b921f12a2abef432cf6108e63519d0183722c2a14ecbb8d0b0621652
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - |
+              while ! nc -z 127.0.0.1 2376 </dev/null; do
+                echo 'waiting for docker daemon...';
+                sleep 5;
+              done
+              /bin/forgejo-runner --config /etc/runner/config.yaml daemon
+          env:
+            - name: DOCKER_HOST
+              value: tcp://127.0.0.1:2376
+            - name: DOCKER_CERT_PATH
+              value: /certs/client
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
+          volumeMounts:
+            - name: runner-configfile
+              mountPath: /etc/runner
+            - name: docker-certs
+              mountPath: /certs
+            - name: runner-secret
+              mountPath: /etc/runner-secret
+              readOnly: true
+
+        - name: dind
+          image: docker.io/docker:29.6.2-dind@sha256:bfec1f5159c63a81ca6fdedbd81404d2c0e16378ed0feec3bb3fbf3998847659
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: REGISTRY_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dhi-registry
+                  key: username
+
+            - name: REGISTRY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dhi-registry
+                  key: password
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - |
+                    until docker info >/dev/null 2>&1; do
+                      sleep 1
+                    done
+
+                    printf '%s' "$REGISTRY_PASSWORD" | \
+                      docker login \
+                        -u "$REGISTRY_USERNAME" \
+                        --password-stdin
+          volumeMounts:
+            - name: docker-certs
+              mountPath: /certs
+          securityContext:
+            privileged: true
+
+
+      volumes:
+        - name: docker-certs
+          emptyDir: {}
+        - name: runner-configfile
+          configMap:
+            name: personal-runner-configmap
+        - name: runner-secret
+          secret:
+            secretName: personal-runner-secret
