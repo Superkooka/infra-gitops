@@ -46,34 +46,9 @@ spec:
           image: docker.io/docker:29.6.2-dind@sha256:bfec1f5159c63a81ca6fdedbd81404d2c0e16378ed0feec3bb3fbf3998847659
           imagePullPolicy: IfNotPresent
           env:
-            - name: REGISTRY_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: dhi-registry
-                  key: username
-
-            - name: REGISTRY_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: dhi-registry
-                  key: password
             - name: DOCKER_TLS_CERTDIR
               value: /certs
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - sh
-                  - -c
-                  - |
-                    until docker info >/dev/null 2>&1; do
-                      sleep 1
-                    done
 
-                    printf '%s' "$REGISTRY_PASSWORD" | \
-                      docker login \
-                        -u "$REGISTRY_USERNAME" \
-                        --password-stdin
           volumeMounts:
             - name: docker-certs
               mountPath: /certs
