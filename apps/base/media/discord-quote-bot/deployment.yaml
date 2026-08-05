@@ -15,7 +15,7 @@ spec:
     spec:
       initContainers:
         - name: migrate
-          image: forge.superkooka.com/superkooka/discord-quote-bot:dirty-latest@sha256:b7726657ec046ea3889214815d6d003cea66c72b487a5fdc84b4ee9e7c194267
+          image: forge.superkooka.com/superkooka/discord-quote-bot:dirty-latest@sha256:1fbc11f4d521e1f630e0c07d429e6394d6c0881b12afa01f14c0e330ea721834
           command:
             - /usr/local/bin/migrate
             - up
@@ -24,7 +24,7 @@ spec:
               value: "UTC"
       containers:
         - name: discord-quote-bot
-          image: forge.superkooka.com/superkooka/discord-quote-bot:dirty-latest@sha256:b7726657ec046ea3889214815d6d003cea66c72b487a5fdc84b4ee9e7c194267
+          image: forge.superkooka.com/superkooka/discord-quote-bot:dirty-latest@sha256:1fbc11f4d521e1f630e0c07d429e6394d6c0881b12afa01f14c0e330ea721834
 
           env:
             - name: TZ
