@@ -12,6 +12,10 @@ data:
       timeout: 3h
       fetch_timeout: 5s
       fetch_interval: 2s
+      envs:
+        DOCKER_HOST: tcp://127.0.0.1:2376
+        DOCKER_TLS_VERIFY: "1"
+        DOCKER_CERT_PATH: /certs/client
       labels:
         - node24:docker://node:24.18.0-trixie@sha256:eb2c73a27cf714b4b6b030f88ab72e62192c38b7d313ea3456695b8ae03c5f3c
         # - node26:docker://dhi.io/node:26.4.0-0-dev@sha256:3b4441ab89d565be22657eaaee47fe1a4d92b21020faa47f0b8e3323cec514e2
@@ -20,9 +24,12 @@ data:
       enabled: true
       dir: /data/cache
     container:
-      network: bridge
+      network: host
+      options: "-v /certs:/certs:ro"
       valid_volumes:
         - /data/**
+        - /certs
+        - /certs/**
     host:
       workdir_parent: /data/work
     server:
