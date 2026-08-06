@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: seafile
-          image: seafileltd/seafile-mc:13.0.19@sha256:3483711551088e1e3423ec2ee933dccfdc779041b11191ea5a943e3225b15637
+          image: seafileltd/seafile-mc:13.0.25@sha256:90c1aaa08731116750cd7ce16cbc6afe0c26006433002d3c7215a5f4254ec244
           ports:
             - containerPort: 80
           env:
