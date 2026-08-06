@@ -60,7 +60,7 @@ spec:
             - "1"
 
         - name: memcached
-          image: memcached:1.6.41@sha256:f7a252e7ba3fbbe9672c483354c5081d02b780122c3bb97bd311d5662b54d0ad
+          image: memcached:1.6.45@sha256:eeb9eaa939ffaa2304899674c9e88a9247ec8e5e40e424a892df7b09914bd2ec
           ports:
             - containerPort: 11211
           args:
