@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: miniflux
-          image: docker.io/miniflux/miniflux:2.2.18
+          image: docker.io/miniflux/miniflux:2.3.3@sha256:49d7b60987616387c306a8023087b31f2c9b7b21288b523026cb04058e8b6dbb
           ports:
             - containerPort: 8080
               protocol: TCP
