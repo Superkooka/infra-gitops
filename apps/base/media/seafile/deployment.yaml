@@ -46,12 +46,12 @@ spec:
               value: "false"
 
         - name: mariadb
-          image: mariadb:12.2.2@sha256:e16f61b8f6ed25111adbb1c5c19bbc2904efc8ed14029999af0cbe1c7ae18bf1
+          image: mariadb:12.2.2@sha256:6a4c4bbf0447c2247801309513fcc0dd17c3f35390368139ce419387fdd1144d
           ports:
             - containerPort: 3306
 
         - name: valkey
-          image: valkey/valkey:9.0.3@sha256:3eeb09785cd61ec8e3be35f8804c8892080f3ca21934d628abc24ee4ed1698f6
+          image: valkey/valkey:9.0.3@sha256:3b55fbaa0cd93cf0d9d961f405e4dfcc70efe325e2d84da207a0a8e6d8fde4f9
           ports:
             - containerPort: 6379
           args:
@@ -60,7 +60,7 @@ spec:
             - "1"
 
         - name: memcached
-          image: memcached:1.6.41@sha256:27db90ca1d538b8bb8dae861fac9a44b3857c54bd1b3a3bd809a45a7744eaae2
+          image: memcached:1.6.41@sha256:f7a252e7ba3fbbe9672c483354c5081d02b780122c3bb97bd311d5662b54d0ad
           ports:
             - containerPort: 11211
           args:
