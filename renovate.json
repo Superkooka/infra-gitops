@@ -1,0 +1,76 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  "extends": [
+    "config:recommended",
+    "docker:pinDigests",
+    "helm:pinDigests"
+  ],
+
+  "enabledManagers": [
+    "kubernetes",
+    "helm-values",
+    "helmv3",
+    "dockerfile"
+  ],
+
+  "kubernetes": {
+    "fileMatch": [
+      "\\.ya?ml$"
+    ]
+  },
+
+  "helm-values": {
+    "fileMatch": [
+      "(^|/)values\\.ya?ml$",
+      "(^|/)\\.ya?ml$"
+    ]
+  },
+
+  "packageRules": [
+    {
+      "description": "Pin container images to immutable digests",
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": true
+    },
+    {
+      "description": "Pin Helm chart versions",
+      "matchManagers": [
+        "helmv3",
+        "helm-values"
+      ],
+      "rangeStrategy": "pin"
+    },
+    {
+      "description": "Group Kubernetes image digest updates",
+      "matchManagers": [
+        "kubernetes"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "groupName": "kubernetes images",
+      "groupSlug": "kubernetes-images"
+    },
+    {
+      "description": "Group Helm chart updates",
+      "matchManagers": [
+        "helmv3",
+        "helm-values"
+      ],
+      "groupName": "helm charts",
+      "groupSlug": "helm-charts"
+    }
+  ],
+
+  "prCreation": "immediate",
+  "rebaseWhen": "conflicted",
+
+  "automerge": false,
+
+  "ignorePaths": [
+    "**/.git/**"
+  ]
+}

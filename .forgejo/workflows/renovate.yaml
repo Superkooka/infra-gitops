@@ -1,0 +1,31 @@
+name: Renovate
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  renovate:
+    runs-on: docker
+
+    steps:
+      - name: Run Renovate
+        uses: docker://renovate/renovate:44.13.3-full@sha256:1ae927b3e345883145457302d94332306aa9df9f3b1d12e87a0721cee5ef07f9
+        env:
+          RENOVATE_PLATFORM: gitea
+          RENOVATE_ENDPOINT: https://forge.superkooka.com/api/v1
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE }}
+          RENOVATE_REPOSITORIES: ${{ forgejo.repository }}
+          GITHUB_COM_TOKEN: ${{ secrets.RENOVATE_GITHUB_COM_TOKEN }}
+
+          # Should be a read only token
+          RENOVATE_HOST_RULES: |
+            [
+              {
+                "matchHost": "forge.superkooka.com",
+                "hostType": "docker",
+                "username": "${{ forgejo.actor }}",
+                "password": "${{ secrets.WRITE_PACKAGE }}"
+              }
+            ]
