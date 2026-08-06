@@ -42,7 +42,7 @@ spec:
             #   mountPath: /data
 
         - name: dind
-          image: docker.io/docker:29.6.1-dind@sha256:66d292e5c26bd33a6f6f61cacb880de2186339a524ecba1ce098dbbaceed6515
+          image: docker.io/docker:29.7.1-dind@sha256:e8faad5a8dc5279dff929afc5449f2791736912fff9f99351d742db2fad01b4c
           imagePullPolicy: IfNotPresent
           env:
             - name: DOCKER_TLS_CERTDIR
