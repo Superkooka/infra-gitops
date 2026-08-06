@@ -4,73 +4,55 @@
   "extends": [
     "config:recommended",
     "docker:pinDigests",
-    "helm:pinDigests"
+    "helpers:pinGitHubActionDigests"
   ],
 
-  "enabledManagers": [
-    "kubernetes",
-    "helm-values",
-    "helmv3",
-    "dockerfile"
-  ],
+  "dependencyDashboard": true,
 
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+
+  // --- Deployments/StatefulSets/... (discord-quote-bot) ---
   "kubernetes": {
-    "fileMatch": [
-      "\\.ya?ml$"
+    "managerFilePatterns": [
+      "/(^|/)(apps|infrastructure)/.+\\.ya?ml$/"
     ]
   },
 
-  "helm-values": {
-    "fileMatch": [
-      "(^|/)values\\.ya?ml$",
-      "(^|/)\\.ya?ml$"
+  // --- FluxCD: OCIRepository, HelmRepository, HelmRelease.spec.chart ---
+  "flux": {
+    "managerFilePatterns": [
+      "/(^|/)(apps|infrastructure)/.+\\.ya?ml$/"
     ]
   },
 
-  "packageRules": [
+  "customManagers": [
     {
-      "description": "Pin container images to immutable digests",
-      "matchDatasources": [
-        "docker"
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)(apps|infrastructure)/.+\\.ya?ml$/"
       ],
-      "pinDigests": true
-    },
-    {
-      "description": "Pin Helm chart versions",
-      "matchManagers": [
-        "helmv3",
-        "helm-values"
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s*\\n\\s*tag:\\s*[\"']?(?<currentValue>[\\w.\\-]+)[\"']?"
       ],
-      "rangeStrategy": "pin"
-    },
-    {
-      "description": "Group Kubernetes image digest updates",
-      "matchManagers": [
-        "kubernetes"
-      ],
-      "matchDatasources": [
-        "docker"
-      ],
-      "groupName": "kubernetes images",
-      "groupSlug": "kubernetes-images"
-    },
-    {
-      "description": "Group Helm chart updates",
-      "matchManagers": [
-        "helmv3",
-        "helm-values"
-      ],
-      "groupName": "helm charts",
-      "groupSlug": "helm-charts"
+      "datasourceTemplate": "{{{datasource}}}",
+      "versioningTemplate": "docker"
     }
   ],
 
-  "prCreation": "immediate",
-  "rebaseWhen": "conflicted",
-
-  "automerge": false,
-
-  "ignorePaths": [
-    "**/.git/**"
+  "packageRules": [
+    {
+      "matchManagers": ["custom.regex"],
+      "pinDigests": false
+    },
+    {
+      "matchUpdateTypes": ["digest"],
+      "groupName": "digest pin updates"
+    },
+    {
+      "matchDatasources": ["helm"],
+      "groupName": "helm charts"
+    }
   ]
 }
