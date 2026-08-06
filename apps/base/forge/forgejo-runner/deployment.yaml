@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: forgejo-runner
-          image: code.forgejo.org/forgejo/runner:12.8.0@sha256:c1d8edf7ed81119152ee4d9ff750ba3c2eb250cad0803c5ddea8c36078824c11
+          image: code.forgejo.org/forgejo/runner:13.0.0@sha256:7fb853bfe73c229be6349398359c0a7bd01fadfd17c106607b2221150b799ed2
           imagePullPolicy: IfNotPresent
           command:
             - "sh"
