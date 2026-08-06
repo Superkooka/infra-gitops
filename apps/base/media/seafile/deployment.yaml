@@ -46,7 +46,7 @@ spec:
               value: "false"
 
         - name: mariadb
-          image: mariadb:12.2.2@sha256:6a4c4bbf0447c2247801309513fcc0dd17c3f35390368139ce419387fdd1144d
+          image: mariadb:12.3.2@sha256:759869cb6f003234a95c6384cdee245b4bce7de26913fe607a8110362c0c007d
           ports:
             - containerPort: 3306
 
