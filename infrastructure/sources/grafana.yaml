@@ -8,7 +8,8 @@ spec:
   # https://github.com/grafana-community/helm-charts/pkgs/container/helm-charts%2Fgrafana
   url: oci://data.forgejo.org/forgejo-helm/forgejo
   ref:
-    tag: 11.3.5
+    tag: 17.1.4
+    digest: sha256:271c0612b01eaa8e7e211427429a02aeb9710ca7da2c2bdda0e75b75731b4fee
   # https://github.com/fluxcd/source-controller/issues/1932
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
