@@ -79,6 +79,11 @@
       "minimumReleaseAge": "0 days",
       "prPriority": 10,
       "labels": ["security"]
+    },
+    {
+      "matchManagers": ["flux"],
+      "matchDepNames": ["fluxcd/flux2"],
+      "enabled": false
     }
   ]
 }
