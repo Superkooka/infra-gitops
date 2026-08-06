@@ -13,6 +13,17 @@
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
 
+  "minimumReleaseAge": "7 days",
+
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "dependencyDashboardApproval": false,
+    "schedule": ["at any time"],
+    "prPriority": 10
+  },
+
   // --- Deployments/StatefulSets/... (discord-quote-bot) ---
   "kubernetes": {
     "managerFilePatterns": [
@@ -53,6 +64,21 @@
     {
       "matchDatasources": ["helm"],
       "groupName": "helm charts"
+    },
+    {
+      "matchUpdateTypes": ["major", "minor"],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "matchDatasources": ["osv"],
+      "groupName": null,
+      "minimumReleaseAge": "0 days",
+      "prPriority": 10,
+      "labels": ["security"]
     }
   ]
 }
