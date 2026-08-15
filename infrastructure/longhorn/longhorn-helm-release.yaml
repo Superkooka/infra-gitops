@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: longhorn-helm-repository
         namespace: flux-system
-      version: 1.12.0
+      version: 1.12.1
   values:
     defaultSettings:
       backupTarget: "nfs://192.168.0.11:/mnt/md0/longhorn-backups" # should be on cluster/home, global ConfigMap?
