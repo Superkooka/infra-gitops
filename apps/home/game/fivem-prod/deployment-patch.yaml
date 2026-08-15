@@ -54,6 +54,31 @@ spec:
             limits:
               cpu: "4000m"
               memory: "8Gi"
+        - name: mariadb
+          image: mariadb:10.11.18@sha256:de61fed4a40d3842f3ee09944ba52792156cfd9adf489b2cc670fc6ded28df8d
+          ports:
+            - containerPort: 3306
+              name: mysql
+              protocol: TCP
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fivem-prod
+                  key: root-password
+            - name: MYSQL_DATABASE
+              value: "fivem"
+            - name: MYSQL_USER
+              value: "fivem"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fivem-prod
+                  key: db-password
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              subPath: mariadb-data
+              name: fivem-data-volume
       volumes:
         - name: fivem-data-volume
           persistentVolumeClaim:
