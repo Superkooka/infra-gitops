@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fivem-prod
+  namespace: game
+  labels:
+    app: fivem-prod
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: fivem-prod
+  template:
+    metadata:
+      labels:
+        app: fivem-prod
+    spec:
+      containers:
+        - name: fivem
+          image: spritsail/fivem:34833@sha256:df40d52af917f0803ce542c9fe9e0e49e3f5b89272f9044b7b5aadd92800ef83
+          imagePullPolicy: IfNotPresent
+          stdin: true
+          tty: true
+          ports:
+            - containerPort: 30120
+              name: game-tcp
+              protocol: TCP
+            - containerPort: 30120
+              name: game-udp
+              protocol: UDP
+            - containerPort: 40120
+              name: txadmin
+              protocol: TCP

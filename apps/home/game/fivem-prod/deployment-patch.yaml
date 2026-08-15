@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fivem-prod
+  namespace: game
+spec:
+  replicas: 1
+  template:
+    spec:
+      initContainers:
+      - name: init-config
+        image: busybox:1.36
+        command:
+          - sh
+          - -c
+          - |
+            mkdir -p /config
+            if [ ! -f /config/server.cfg ]; then
+              echo "Initialisation de /config/server.cfg..."
+              cp /template-config/server.cfg /config/server.cfg
+            fi
+        volumeMounts:
+          - mountPath: /template-config
+            name: config-template
+          - mountPath: /config
+            subPath: config
+            name: fivem-data-volume
+      containers:
+        - name: fivem
+          env:
+            - name: NO_DEFAULT_CONFIG
+              value: "1"
+            - name: TXHOST_DATA_PATH
+              value: "/txData"
+            - name: TXHOST_TXA_URL
+              value: "https://prod.txadmin.superkooka.com"
+            - name: TXHOST_GAME_NAME
+              value: "fivem"
+            - name: TXHOST_QUIET_MODE
+              value: "false"
+            - name: TXHOST_DEFAULT_ACCOUNT
+              value: "Superkooka:19587921"
+          volumeMounts:
+            - mountPath: /config
+              subPath: config
+              name: fivem-data-volume
+            - mountPath: /txData
+              subPath: txData
+              name: fivem-data-volume
+          resources:
+            requests:
+              cpu: "1000m"
+              memory: "2Gi"
+            limits:
+              cpu: "4000m"
+              memory: "8Gi"
+      volumes:
+        - name: fivem-data-volume
+          persistentVolumeClaim:
+            claimName: fivem-prod-pvc
+        - name: config-template
+          secret:
+            secretName: fivem-prod-config
