@@ -34,6 +34,19 @@ spec:
         exposedPort: 2023
         protocol: TCP
 
+      fivem-game-tcp:
+        port: 30120
+        expose:
+          default: true
+        exposedPort: 30120
+        protocol: TCP
+
+      fivem-game-udp:
+        port: 30120
+        expose:
+          default: true
+        exposedPort: 30120
+        protocol: UDP
     ingressRoute:
       dashboard:
         enabled: false
