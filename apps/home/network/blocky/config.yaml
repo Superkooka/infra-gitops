@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blocky-config
+  namespace: network
+data:
+  config.yml: |
+    upstreams:
+      groups:
+        default:
+          - 80.67.169.12   # ns0.fdn.fr
+          - 80.67.169.40   # ns1.fdn.fr
+      strategy: parallel_best
+      timeout: 2s
+
+    bootstrapDns:
+      - upstream: 80.67.169.12
+      - upstream: 80.67.169.40
+
+    blocking:
+      denylists:
+        ads:
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      clientGroupsBlock:
+        default:
+          - ads
+      blockType: zeroIp
+      refreshPeriod: 4h
+
+    caching:
+      minTime: 5m
+      maxTime: 30m
+      prefetching: true
+
+    ports:
+      dns: 53
+      http: 4000
+
+    log:
+      level: info
+      format: text
+
+    prometheus:
+      enable: false
+      # path: /metrics

@@ -35,6 +35,21 @@ spec:
         exposedPort: 2023
         protocol: TCP
 
+
+      dns-udp:
+        port: 5354
+        expose:
+          default: true
+        exposedPort: 53
+        protocol: UDP
+
+      dns-tcp:
+        port: 53
+        expose:
+          default: true
+        exposedPort: 53
+        protocol: TCP
+
       fivem-game-tcp:
         port: 30120
         expose:
@@ -43,7 +58,7 @@ spec:
         protocol: TCP
 
       fivem-game-udp:
-        port: 30120
+        port: 30121
         expose:
           default: true
         exposedPort: 30120
