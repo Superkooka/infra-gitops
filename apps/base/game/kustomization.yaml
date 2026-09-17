@@ -7,9 +7,6 @@ resources:
   - fivem-prod/deployment.yaml
   - fivem-prod/service.yaml
 
-  - lol-leaderboard/leaderboard-crontab.yaml
-  - lol-leaderboard/match-crontab.yaml
-
   - pelican-panel/caddyfile.yaml
   - pelican-panel/deployment.yaml
   - pelican-panel/service.yaml
