@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Run Renovate
-        uses: docker://renovate/renovate:44.14.3-full@sha256:4fbdce22a4776f284b00919645599331588f9e4c88a1f80c09d333b09911a0e8
+        uses: docker://renovate/renovate:44.14.12-full@sha256:2dc96cd8ccd019b3aabbcff7d7894c05796db4cb98ed428611338bfa8d93c39f
         env:
           RENOVATE_PLATFORM: gitea
           RENOVATE_ENDPOINT: https://forge.superkooka.com/api/v1
