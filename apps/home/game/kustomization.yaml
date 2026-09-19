@@ -4,11 +4,6 @@ kind: Kustomization
 resources:
   - ../../base/game
 
-  - fivem-prod/config.yaml
-  - fivem-prod/secret.yaml
-  - fivem-prod/volume.yaml
-  - fivem-prod/ingress.yaml
-
   - pelican-panel/secret.yaml
   - pelican-panel/volume.yaml
   - pelican-panel/middleware.yaml
@@ -32,8 +27,3 @@ patches:
     target:
       kind: Deployment
       name: pelican-wings
-
-  - path: fivem-prod/deployment-patch.yaml
-    target:
-      kind: Deployment
-      name: fivem-prod
