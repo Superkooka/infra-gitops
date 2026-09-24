@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts3server
+  namespace: game
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: ts3server
+          env:
+            - name: TS3SERVER_LICENSE
+              value: "accept"
+            - name: TS3SERVER_SERVERADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ts3server
+                  key: serveradmin-password
+          volumeMounts:
+            - mountPath: /var/ts3server
+              name: ts3server-data-volume
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "1000m"
+              memory: "512Mi"
+      volumes:
+        - name: ts3server-data-volume
+          persistentVolumeClaim:
+            claimName: ts3server-pvc

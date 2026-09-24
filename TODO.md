@@ -13,7 +13,7 @@
 - [x] Jellyfin
 - [x] Miniflux
 - [ ] Synapse (matrix)
-- [ ] ts3server
+- [x] ts3server
 - [ ] Seafile
 
 - [ ] Forgejo

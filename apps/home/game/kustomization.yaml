@@ -12,6 +12,10 @@ resources:
   - pelican-wings/volume.yaml
   - pelican-wings/ingress.yaml
 
+  - ts3server/secret.yaml
+  - ts3server/volume.yaml
+  - ts3server/ingress.yaml
+
 patches:
   - path: pelican-panel/values-patch.yaml
     target:
@@ -27,3 +31,8 @@ patches:
     target:
       kind: Deployment
       name: pelican-wings
+
+  - path: ts3server/deployment-patch.yaml
+    target:
+      kind: Deployment
+      name: ts3server
