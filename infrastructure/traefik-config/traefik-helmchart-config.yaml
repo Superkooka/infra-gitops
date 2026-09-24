@@ -35,7 +35,12 @@ spec:
         exposedPort: 2023
         protocol: TCP
 
-
+      # A TCP and a UDP port must never share the same `port` in the same
+      # object: Helm upgrades use a strategic merge patch keyed on the port
+      # number only, so one of the two entries gets dropped
+      # (kubernetes/kubernetes#47249). That is why dns-udp listens on 5354
+      # inside the pod, and why `service.single: false` splits TCP and UDP
+      # into the `traefik` and `traefik-udp` Services.
       dns-udp:
         port: 5354
         expose:
@@ -50,19 +55,6 @@ spec:
         exposedPort: 53
         protocol: TCP
 
-      fivem-game-tcp:
-        port: 30120
-        expose:
-          default: true
-        exposedPort: 30120
-        protocol: TCP
-
-      fivem-game-udp:
-        port: 30121
-        expose:
-          default: true
-        exposedPort: 30120
-        protocol: UDP
     ingressRoute:
       dashboard:
         enabled: false
