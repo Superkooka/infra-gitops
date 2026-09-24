@@ -7,6 +7,8 @@ spec:
   dependsOn:
     - name: infrastructure
     - name: database-overlay
+    # prometheus-operator CRDs (ServiceMonitor, PodMonitor) + monitoring namespace
+    - name: monitoring
   interval: 10m
   path: ./apps/home
   prune: true

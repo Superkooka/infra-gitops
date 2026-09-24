@@ -19,7 +19,7 @@ spec:
       labels:
         app: blocky
       annotations:
-        config-hash: "v1"
+        config-hash: "v2"
     spec:
       dnsPolicy: Default
       securityContext:
@@ -38,9 +38,9 @@ spec:
             - name: dns-tcp
               containerPort: 53
               protocol: TCP
-            # - name: http
-            #   containerPort: 4000
-            #   protocol: TCP
+            - name: http
+              containerPort: 4000
+              protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

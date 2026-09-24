@@ -8,6 +8,11 @@ spec:
     api:
       basePath: /traefik
 
+    # scraped by infrastructure/monitoring-config/traefik-podmonitor.yaml
+    metrics:
+      prometheus:
+        addRoutersLabels: true
+
     service:
       spec:
         externalTrafficPolicy: Local

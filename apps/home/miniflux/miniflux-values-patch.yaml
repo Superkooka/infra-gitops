@@ -51,3 +51,18 @@ spec:
               value: "https://rss.superkooka.com"
             - name: DISABLE_API
               value: "true"
+            # /metrics, restricted to the pod network + basic auth
+            - name: METRICS_COLLECTOR
+              value: "1"
+            - name: METRICS_ALLOWED_NETWORKS
+              value: "10.42.0.0/16"
+            - name: METRICS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-metrics-secret
+                  key: username
+            - name: METRICS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-metrics-secret
+                  key: password

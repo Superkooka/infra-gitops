@@ -8,6 +8,8 @@ resources:
   - forgejo/databaseclaim.yaml
   - forgejo/volumes.yaml
   - forgejo/ingress.yaml
+  - forgejo/metrics-secret.yaml
+  - forgejo/servicemonitor.yaml
   - forgejo-runner/runner-secret.yaml
   - forgejo-runner/docker-registry-secret.yaml
   - forgejo-runner/volumes.yaml
@@ -17,6 +19,7 @@ resources:
   - git-pages/ingress.yaml
   - git-pages/configmap.yaml
   - git-pages/volumes.yaml
+  - git-pages/podmonitor.yaml
   - perforce/volume.yaml
   - perforce/ingress.yaml
 patches:
