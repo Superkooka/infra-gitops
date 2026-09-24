@@ -14,7 +14,7 @@ resources:
 
   - ts3server/secret.yaml
   - ts3server/volume.yaml
-  - ts3server/ingress.yaml
+  - ts3server/loadbalancer.yaml
 
 patches:
   - path: pelican-panel/values-patch.yaml

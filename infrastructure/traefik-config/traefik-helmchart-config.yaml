@@ -55,20 +55,6 @@ spec:
         exposedPort: 53
         protocol: TCP
 
-      ts3-voice:
-        port: 9987
-        expose:
-          default: true
-        exposedPort: 9987
-        protocol: UDP
-
-      ts3-filetransfer:
-        port: 30033
-        expose:
-          default: true
-        exposedPort: 30033
-        protocol: TCP
-
     ingressRoute:
       dashboard:
         enabled: false
