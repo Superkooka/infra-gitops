@@ -11,3 +11,6 @@ resources:
 
   - pelican-wings/deployment.yaml
   - pelican-wings/service.yaml
+
+  - ts3server/deployment.yaml
+  - ts3server/service.yaml

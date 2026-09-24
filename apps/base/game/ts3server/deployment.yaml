@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts3server
+  namespace: game
+  labels:
+    app: ts3server
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: ts3server
+  template:
+    metadata:
+      labels:
+        app: ts3server
+    spec:
+      containers:
+        - name: ts3server
+          image: teamspeak:3.13.8@sha256:6dfdfb22869adf50e1b66d024b360b786d57a85ea09e8e8fdb6cca23949b2813
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9987
+              name: voice
+              protocol: UDP
+            - containerPort: 30033
+              name: filetransfer
+              protocol: TCP
+            - containerPort: 10011
+              name: query
+              protocol: TCP
+
+          livenessProbe:
+            tcpSocket:
+              port: 10011
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            tcpSocket:
+              port: 10011
+            initialDelaySeconds: 10
+            periodSeconds: 5
