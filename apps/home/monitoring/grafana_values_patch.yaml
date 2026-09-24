@@ -5,22 +5,15 @@ metadata:
   namespace: monitoring
 spec:
   values:
-    image:
-      tag: 12.3.3
-      sha: ...
-
     admin:
-      existingSecret: ""
+      existingSecret: grafana-admin-secret
       userKey: admin-user
       passwordKey: admin-password
 
-    plugins: 
-      - ...
+    persistence:
+      existingClaim: grafana-data-pvc
 
     grafana.ini:
-      plugins:
-        enabled: false
-
       server:
         domain: grafana.superkooka.com
-        root_url: "%(protocol)s://%(domain)s"
+        root_url: https://grafana.superkooka.com

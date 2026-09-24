@@ -3,10 +3,13 @@ kind: Service
 metadata:
   name: miniflux
   namespace: miniflux
+  labels:
+    app: miniflux
 spec:
   selector:
     app: miniflux
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 8080
       protocol: TCP

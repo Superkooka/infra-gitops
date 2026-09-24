@@ -9,6 +9,9 @@ spec:
       containers:
         - name: git-pages
           command: ["git-pages", "-config", "/etc/git-pages/config.toml"]
+          ports:
+            - name: metrics # [server] metrics in config.toml
+              containerPort: 3002
           volumeMounts:
             - name: data
               mountPath: /data

@@ -3,8 +3,21 @@ kind: Kustomization
 resources:
   - ../../base/network/
   - blocky/config.yaml
+  - blocky/podmonitor.yaml
 patches:
   - path: blocky/deployment-patch.yaml
     target:
       kind: Deployment
       name: blocky
+configMapGenerator:
+  - name: grafana-dashboard-blocky
+    namespace: network
+    files:
+      # https://github.com/0xERR0R/blocky/blob/v0.35.0/docs/blocky-grafana.json
+      - blocky/dashboards/blocky.json
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Apps

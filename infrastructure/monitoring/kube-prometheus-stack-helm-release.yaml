@@ -1,0 +1,69 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 30m
+  timeout: 15m
+  chartRef:
+    kind: OCIRepository
+    name: kube-prometheus-stack
+    namespace: flux-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+
+  # kube-state-metrics custom resource config exposing Flux objects status
+  # https://github.com/fluxcd/flux2-monitoring-example
+  valuesFrom:
+    - kind: ConfigMap
+      name: flux-kube-state-metrics-config
+      valuesKey: kube-state-metrics-config.yaml
+
+  # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+  values:
+    # grafana is deployed on its own (apps/base/monitoring), only ship the
+    # dashboards / datasources ConfigMaps picked up by its sidecar
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      forceDeployDatasources: true
+
+    # k3s embeds these components in the k3s process and does not expose
+    # their metrics outside of localhost
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+
+    alertmanager:
+      enabled: true
+
+    prometheus:
+      prometheusSpec:
+        retention: 15d
+        retentionSize: 18GB
+
+        # pick up every ServiceMonitor / PodMonitor / PrometheusRule in the
+        # cluster, not only the ones labelled with this helm release
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        scrapeConfigSelectorNilUsesHelmValues: false
+
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: longhorn
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 20Gi

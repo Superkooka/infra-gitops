@@ -11,3 +11,5 @@ resources:
   - nfs.yaml
   - rustfs.yaml
   - database.yaml
+  - monitoring.yaml
+  - monitoring-config.yaml

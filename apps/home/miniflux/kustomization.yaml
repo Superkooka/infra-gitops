@@ -6,6 +6,8 @@ resources:
   - miniflux-databaseclaim.yaml
   - miniflux-secret.yaml
   - miniflux-ingress.yaml
+  - miniflux-metrics-secret.yaml
+  - miniflux-servicemonitor.yaml
 patches:
   - path: miniflux-values-patch.yaml
     target:

@@ -5,6 +5,7 @@ resources:
   - bitnami.yaml
   - forgejo.yaml
   - grafana.yaml
+  - prometheus-community.yaml
   - gitea.yaml
   - jellyfin.yaml
   - nvidia.yaml
