@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: bookatlas
+      annotations:
+        kubectl.kubernetes.io/default-container: caddy
     spec:
       securityContext:
         runAsNonRoot: true
@@ -63,6 +65,27 @@ spec:
               mountPath: /data
             - name: caddy-state
               mountPath: /config
+
+        # Target of the deploy script (kubectl exec -c uploader). Uploads and extraction run
+        # here with their own memory limit, so they cannot get the caddy container OOM-killed.
+        # Same image as caddy: it ships the busybox tools the script uses.
+        - name: uploader
+          image: caddy:2.11.4-alpine@sha256:6aeddd44c3078b0f9a35206472a11420648a79c184603ef95957d0a20044cb2b
+          command: ["sh", "-c", "trap 'exit 0' TERM; while :; do sleep 3600 & wait $!; done"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 1Gi
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
       volumes:
         - name: caddy-config
           configMap:
@@ -70,4 +93,6 @@ spec:
         - name: caddy-data
           emptyDir: {}
         - name: caddy-state
+          emptyDir: {}
+        - name: tmp
           emptyDir: {}
