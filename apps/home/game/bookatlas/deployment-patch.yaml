@@ -11,6 +11,10 @@ spec:
           volumeMounts:
             - name: site
               mountPath: /srv
+        - name: uploader
+          volumeMounts:
+            - name: site
+              mountPath: /srv
       volumes:
         - name: site
           persistentVolumeClaim:
