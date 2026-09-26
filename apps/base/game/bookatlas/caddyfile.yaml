@@ -21,6 +21,17 @@ data:
         @html path / *.html */
         header @html Cache-Control "no-cache"
 
+        # Lossless WebP copy of a PNG (<file>.png.webp), served when the browser accepts it.
+        # The URL keeps its .png extension, so the HTML stays unchanged.
+        @png path *.png
+        header @png +Vary Accept
+        @webp {
+            path *.png
+            header Accept *image/webp*
+            file {path}.webp
+        }
+        rewrite @webp {path}.webp
+
         file_server {
             precompressed br zstd gzip
         }
