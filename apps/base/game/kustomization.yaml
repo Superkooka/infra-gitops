@@ -11,3 +11,7 @@ resources:
 
   - pelican-wings/deployment.yaml
   - pelican-wings/service.yaml
+
+  - bookatlas/caddyfile.yaml
+  - bookatlas/deployment.yaml
+  - bookatlas/service.yaml
