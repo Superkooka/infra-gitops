@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: git-pages
+  namespace: forge
+spec:
+  selector:
+    matchLabels:
+      app: git-pages
+  podMetricsEndpoints:
+    - port: metrics
+      path: /metrics

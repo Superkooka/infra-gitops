@@ -1,0 +1,27 @@
+# Same as the chart `prometheus.podmonitor`, kept here because cert-manager is
+# installed before the prometheus-operator CRDs exist
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cert-manager
+  namespace: monitoring
+spec:
+  jobLabel: app.kubernetes.io/name
+  namespaceSelector:
+    matchNames:
+      - cert-manager
+  selector:
+    matchExpressions:
+      - key: app.kubernetes.io/instance
+        operator: In
+        values:
+          - cert-manager
+      - key: app.kubernetes.io/component
+        operator: In
+        values:
+          - cainjector
+          - controller
+          - webhook
+  podMetricsEndpoints:
+    - port: http-metrics
+      path: /metrics

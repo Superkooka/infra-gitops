@@ -4,18 +4,13 @@ metadata:
   name: grafana-helm-release
   namespace: monitoring
 spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: grafana
-      sourceRef:
-        kind: HelmRepository
-        name: grafana-helm-repository
-        namespace: flux-system
-      interval: 1m
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: grafana-helm-repository
+    namespace: flux-system
+  # https://github.com/grafana-community/helm-charts/blob/main/charts/grafana/values.yaml
   values:
-    image:
-      tag: 12.3.3
     deploymentStrategy:
       type: Recreate
     persistence:
@@ -23,6 +18,26 @@ spec:
       enabled: true
     rbac:
       pspEnabled: false
+
+    serviceMonitor:
+      enabled: true
+
+    # datasources (Prometheus, Alertmanager) and dashboards are provisioned
+    # from labelled ConfigMaps, mostly shipped by kube-prometheus-stack
+    sidecar:
+      datasources:
+        enabled: true
+        label: grafana_datasource
+        labelValue: "1"
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        labelValue: "1"
+        searchNamespace: ALL
+        folderAnnotation: grafana_folder
+        provider:
+          foldersFromFilesStructure: true
+
     grafana.ini:
       plugins:
           enabled: false

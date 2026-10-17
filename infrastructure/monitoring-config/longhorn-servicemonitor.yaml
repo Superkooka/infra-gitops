@@ -1,0 +1,17 @@
+# Same as the chart `metrics.serviceMonitor`, kept here because the longhorn
+# HelmRelease is installed before the prometheus-operator CRDs exist
+# https://longhorn.io/docs/1.12.1/monitoring/prometheus-and-grafana-setup/
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: longhorn
+  namespace: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - longhorn
+  selector:
+    matchLabels:
+      app: longhorn-manager
+  endpoints:
+    - port: manager

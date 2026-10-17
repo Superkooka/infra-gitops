@@ -37,6 +37,10 @@ spec:
       name: forgejo-admin-user-secret
       valuesKey: email
       targetPath: gitea.admin.email
+    - kind: Secret
+      name: forgejo-metrics-secret
+      valuesKey: token
+      targetPath: gitea.config.metrics.TOKEN
 
   values:
     image:
@@ -69,6 +73,8 @@ spec:
           MERGES: pubkey, twofa
         lfs:
           PATH: /data/git/lfs
+        metrics:
+          ENABLED: true
     signing:
       enabled: true
       gpgHome: /data/git/.gnupg

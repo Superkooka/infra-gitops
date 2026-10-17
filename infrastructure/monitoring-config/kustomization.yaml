@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - traefik-podmonitor.yaml
+  - longhorn-servicemonitor.yaml
+  - longhorn-network-policy.yaml
+  - cert-manager-podmonitor.yaml
+  - flux-podmonitor.yaml
+
+# dashboards picked up by the grafana sidecar (label grafana_dashboard=1)
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    grafana_folder: Infrastructure
+configMapGenerator:
+  - name: grafana-dashboard-traefik
+    namespace: monitoring
+    files:
+      # https://github.com/traefik/traefik/blob/v3.7.13/contrib/grafana/traefik-kubernetes.json
+      - dashboards/traefik.json
+  - name: grafana-dashboard-flux
+    namespace: monitoring
+    files:
+      # https://github.com/fluxcd/flux2-monitoring-example/tree/main/monitoring/configs/dashboards
+      - dashboards/flux-cluster.json
+      - dashboards/flux-control-plane.json

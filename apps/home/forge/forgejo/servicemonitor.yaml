@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: forgejo
+  namespace: forge
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: forgejo
+      app.kubernetes.io/instance: forgejo
+  endpoints:
+    - port: http
+      path: /metrics
+      authorization:
+        type: Bearer
+        credentials:
+          name: forgejo-metrics-secret
+          key: token

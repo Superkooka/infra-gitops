@@ -41,5 +41,5 @@ data:
       format: text
 
     prometheus:
-      enable: false
-      # path: /metrics
+      enable: true
+      path: /metrics

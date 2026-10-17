@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: miniflux
+  namespace: miniflux
+spec:
+  selector:
+    matchLabels:
+      app: miniflux
+  endpoints:
+    - port: http
+      path: /metrics
+      basicAuth:
+        username:
+          name: miniflux-metrics-secret
+          key: username
+        password:
+          name: miniflux-metrics-secret
+          key: password

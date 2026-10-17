@@ -1,0 +1,15 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: kube-prometheus-stack
+  namespace: flux-system
+spec:
+  interval: 1h
+  # https://github.com/prometheus-community/helm-charts/pkgs/container/charts%2Fkube-prometheus-stack
+  url: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
+  ref:
+    tag: 82.16.0
+    digest: sha256:2be8498cded44d6d5e3724b3f790ab4ede0942bcde6a8eb4be192b22e523f5d8
+  # https://github.com/fluxcd/source-controller/issues/1932
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
