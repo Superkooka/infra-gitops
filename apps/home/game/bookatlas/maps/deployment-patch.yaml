@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookatlas-maps
+  namespace: game
+spec:
+  template:
+    spec:
+      containers:
+        - name: caddy
+          volumeMounts:
+            - name: site
+              mountPath: /srv
+              readOnly: true
+        - name: uploader
+          volumeMounts:
+            - name: site
+              mountPath: /srv
+      volumes:
+        - name: site
+          hostPath:
+            path: /mnt/md0/bookatlas-maps
+            type: Directory

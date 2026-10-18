@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookatlas-maps-caddy
+  namespace: game
+data:
+  Caddyfile: |
+    {
+        admin off
+        auto_https off
+        servers {
+            trusted_proxies static 10.42.0.0/16
+        }
+    }
+
+    # Maps: PNG grids (/<z>/<x>/<y>.png) and PMTiles archives, served straight from /srv.
+    # file_server answers Range requests natively (206 + Accept-Ranges), which PMTiles needs.
+    # No encode: both formats are already compressed, and a re-encoded body breaks Range offsets.
+    :8080 {
+        root * /srv
+
+        # The site fetches maps cross-origin; Range/If-Match trigger a preflight.
+        @cors header Origin https://bookatlas.superkooka.com
+        header @cors {
+            Access-Control-Allow-Origin "https://bookatlas.superkooka.com"
+            Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+            Access-Control-Allow-Headers "Range, If-Match, If-None-Match"
+            Access-Control-Expose-Headers "Content-Length, Content-Range, Accept-Ranges, ETag"
+            Access-Control-Max-Age "86400"
+            Vary Origin
+        }
+        @preflight method OPTIONS
+        respond @preflight 204
+
+        @png path *.png
+        header @png Cache-Control "public, max-age=31536000, immutable"
+
+        # PMTiles archives get replaced in place: revalidate (ETag) instead of caching blindly.
+        @pmtiles path *.pmtiles
+        header @pmtiles Cache-Control "no-cache"
+
+        file_server
+    }
+
+    # Probes, kept off the data port.
+    :8081 {
+        respond /healthz "ok" 200
+    }

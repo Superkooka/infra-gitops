@@ -12,8 +12,10 @@ resources:
   - pelican-wings/volume.yaml
   - pelican-wings/ingress.yaml
 
-  - bookatlas/volume.yaml
-  - bookatlas/ingress.yaml
+  - bookatlas/site/volume.yaml
+  - bookatlas/site/ingress.yaml
+
+  - bookatlas/maps/ingress.yaml
 
 patches:
   - path: pelican-panel/values-patch.yaml
@@ -31,7 +33,12 @@ patches:
       kind: Deployment
       name: pelican-wings
 
-  - path: bookatlas/deployment-patch.yaml
+  - path: bookatlas/site/deployment-patch.yaml
     target:
       kind: Deployment
       name: bookatlas
+
+  - path: bookatlas/maps/deployment-patch.yaml
+    target:
+      kind: Deployment
+      name: bookatlas-maps

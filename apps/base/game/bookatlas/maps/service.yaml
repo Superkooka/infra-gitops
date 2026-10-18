@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookatlas-maps-service
+  namespace: game
+spec:
+  selector:
+    app: bookatlas-maps
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
