@@ -25,7 +25,7 @@ spec:
 
       containers:
         - name: caddy
-          image: caddy:2.11.4-alpine@sha256:6aeddd44c3078b0f9a35206472a11420648a79c184603ef95957d0a20044cb2b
+          image: caddy:2.11.7-alpine@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f
           ports:
             - containerPort: 8080
               name: http
@@ -70,7 +70,7 @@ spec:
         # here with their own memory limit, so they cannot get the caddy container OOM-killed.
         # Same image as caddy: it ships the busybox tools the script uses.
         - name: uploader
-          image: caddy:2.11.4-alpine@sha256:6aeddd44c3078b0f9a35206472a11420648a79c184603ef95957d0a20044cb2b
+          image: caddy:2.11.7-alpine@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f
           command: ["sh", "-c", "trap 'exit 0' TERM; while :; do sleep 3600 & wait $!; done"]
           securityContext:
             allowPrivilegeEscalation: false
