@@ -32,8 +32,9 @@ data:
         @preflight method OPTIONS
         respond @preflight 204
 
+        # Tiles live at stable URLs (no hash) and get regenerated: short cache, then revalidate (ETag).
         @png path *.png
-        header @png Cache-Control "public, max-age=31536000, immutable"
+        header @png Cache-Control "public, max-age=300, must-revalidate"
 
         # PMTiles archives get replaced in place: revalidate (ETag) instead of caching blindly.
         @pmtiles path *.pmtiles
