@@ -12,10 +12,15 @@ resources:
   - pelican-wings/deployment.yaml
   - pelican-wings/service.yaml
 
-  - bookatlas/site/caddyfile.yaml
   - bookatlas/site/deployment.yaml
   - bookatlas/site/service.yaml
 
   - bookatlas/maps/caddyfile.yaml
   - bookatlas/maps/deployment.yaml
   - bookatlas/maps/service.yaml
+
+configMapGenerator:
+  - name: bookatlas-caddy
+    namespace: game
+    files:
+      - Caddyfile=bookatlas/site/Caddyfile

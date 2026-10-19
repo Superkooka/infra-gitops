@@ -1,0 +1,41 @@
+{
+    admin off
+    auto_https off
+    servers {
+        trusted_proxies static 10.42.0.0/16
+    }
+}
+
+# Site: /srv/current is a symlink to /srv/releases/<id>, swapped atomically on deploy.
+:8080 {
+    root * /srv/current
+    encode zstd gzip
+
+    # CSS filenames contain a content hash, so a changed file gets a new URL: cache forever.
+    @css path *.css
+    header @css Cache-Control "public, max-age=31536000, immutable"
+
+    # Everything else (HTML, PDF, PNG, fonts, JS...) keeps a stable URL: always revalidate (ETag).
+    @revalidate not path *.css
+    header @revalidate Cache-Control "no-cache"
+
+    # Lossless WebP copy of a PNG (<file>.png.webp), served when the browser accepts it.
+    # The URL keeps its .png extension, so the HTML stays unchanged.
+    @png path *.png
+    header @png +Vary Accept
+    @webp {
+        path *.png
+        header Accept *image/webp*
+        file {path}.webp
+    }
+    rewrite @webp {path}.webp
+
+    file_server {
+        precompressed br zstd gzip
+    }
+}
+
+# Probes, kept off the site port so they work before the first release.
+:8081 {
+    respond /healthz "ok" 200
+}
