@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: baikal
 spec:
+  replicas: 0
   template:
     spec:
       containers:
