@@ -4,3 +4,5 @@ resources:
   - namespace.yaml
   - baikal/deployment.yaml
   - baikal/service.yaml
+  - kanboard/deployment.yaml
+  - kanboard/service.yaml

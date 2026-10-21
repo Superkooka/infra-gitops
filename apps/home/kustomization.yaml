@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - forge/
   - game/
-  - kanboard/
   - media/
   - miniflux/
   - monitoring/

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: kanboard-data-pvc
-  namespace: kanboard
+  namespace: social
   annotations:
     recurring-job-group.longhorn.io/default: enabled
 spec:
@@ -18,7 +18,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: kanboard-plugins-pvc
-  namespace: kanboard
+  namespace: social
   annotations:
     recurring-job-group.longhorn.io/default: enabled
 spec:

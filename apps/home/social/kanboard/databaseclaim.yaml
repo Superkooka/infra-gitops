@@ -2,7 +2,7 @@ apiVersion: postgres.operator.superkooka.com/v1beta1
 kind: DatabaseClaim
 metadata:
   name: kanboard-databaseclaim
-  namespace: kanboard
+  namespace: social
 spec:
   instanceRef:
     name: main-postgresql-instance

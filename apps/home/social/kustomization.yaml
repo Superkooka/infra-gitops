@@ -5,8 +5,15 @@ resources:
   - baikal/databaseclaim.yaml
   - baikal/volumes.yaml
   - baikal/ingress.yaml
+  - kanboard/databaseclaim.yaml
+  - kanboard/volumes.yaml
+  - kanboard/ingress.yaml
 patches:
   - path: baikal/deployment-patch.yaml
     target:
       kind: Deployment
       name: baikal
+  - path: kanboard/deployment-patch.yaml
+    target:
+      kind: Deployment
+      name: kanboard
