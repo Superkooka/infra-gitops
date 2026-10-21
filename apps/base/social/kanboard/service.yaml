@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kanboard
+  namespace: social
+spec:
+  selector:
+    app: kanboard
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
