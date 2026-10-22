@@ -20,7 +20,7 @@ spec:
 
       containers:
         - name: pelican
-          image: ghcr.io/pelican/panel:v1.0.0-rc.1@sha256:6cdbd674c14221b760da980cbeecab1982cdd1d38746ae204306fe156b19239d
+          image: ghcr.io/pelican/panel:v1.0.0-rc.2@sha256:cb717c15da9bcdc93f22a22a02d5460a1ce51fd03f2975b4ce53d745f4cc9ac8
           env:
             - name: BEHIND_PROXY
               value: "true"
