@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: wings
-          image: ghcr.io/pelican-dev/wings:v1.0.0-beta24@sha256:2a1d4bbf7af43870d746684f8f8e01144cb6a0605bacab779fc1b2fda390591a
+          image: ghcr.io/pelican/wings:v1.0.0-rc.1@sha256:cf62cae99329dde1a0507d144fc5fb0c5e9d6c8346e6987d67dc08bc323e5644
           tty: true
 
           env:
